@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprehensive Quiz - 50+ Questions</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .quiz-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            border-radius: 15px;
+        }
+        .quiz-progress {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .progress-bar {
+            height: 10px;
+            background: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #27ae60, #2ecc71);
+            transition: width 0.3s;
+            width: 0%;
+        }
+        .question-card {
+            background: white;
+            padding: 30px;
+            margin: 20px 0;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border-left: 5px solid #3498db;
+        }
+        .question-number {
+            font-size: 0.9em;
+            color: #7f8c8d;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .question-text {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .option {
+            padding: 15px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: #f8f9fa;
+        }
+        .option:hover {
+            border-color: #3498db;
+            background: #e3f2fd;
+            transform: translateX(5px);
+        }
+        .option.selected {
+            border-color: #3498db;
+            background: #e3f2fd;
+            font-weight: bold;
+        }
+        .option.correct {
+            border-color: #27ae60;
+            background: #d5f4e6;
+        }
+        .option.incorrect {
+            border-color: #e74c3c;
+            background: #fadbd8;
+        }
+        .explanation {
+            margin-top: 15px;
+            padding: 15px;
+            background: #fff9e6;
+            border-left: 4px solid #f39c12;
+            border-radius: 5px;
+            display: none;
+        }
+        .explanation.show {
+            display: block;
+        }
+        .quiz-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin: 30px 0;
+        }
+        .btn-quiz {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn-submit {
+            background: #3498db;
+            color: white;
+        }
+        .btn-submit:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        .btn-next {
+            background: #27ae60;
+            color: white;
+        }
+        .btn-next:hover {
+            background: #229954;
+        }
+        .btn-restart {
+            background: #e74c3c;
+            color: white;
+        }
+        .score-display {
+            text-align: center;
+            padding: 30px;
+            background: white;
+            border-radius: 15px;
+            margin: 20px 0;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        .score-number {
+            font-size: 4em;
+            font-weight: bold;
+            color: #27ae60;
+        }
+        .category-header {
+            background: linear-gradient(135deg, #8e44ad, #c39bd3);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 30px 0 20px 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <a href="index.html" class="back-link">← Back to Modules</a>
+        
+        <div class="quiz-header">
+            <h1>🎯 Comprehensive Graph Theory Quiz</h1>
+            <p>50+ Questions Testing Your Complete Understanding</p>
+        </div>
+
+        <div class="quiz-progress">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                <span id="progress-text">Question <span id="current-q">0</span> of <span id="total-q">52</span></span>
+                <span id="score-text">Score: <span id="current-score">0</span>/<span id="answered">0</span></span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+        </div>
+
+        <div id="quiz-content">
+            <!-- Module 1: Fundamentals (15 questions) -->
+            <div class="category-header">
+                <h2>📚 Module 1: Fundamentals of Graph Theory</h2>
+            </div>
+
+            <div class="question-card" data-question="1" data-answer="b">
+                <div class="question-number">Question 1</div>
+                <div class="question-text">What is a graph in mathematical terms?</div>
+                <div class="options">
+                    <div class="option" data-option="a">A) A visual chart showing data trends</div>
+                    <div class="option" data-option="b">B) A structure G = (V, E) with vertices and edges</div>
+                    <div class="option" data-option="c">C) A function that maps x to y</div>
+                    <div class="option" data-option="d">D) A tree structure with hierarchical data</div>
+                </div>
+                <div class="explanation">
+                    <strong>Correct!</strong> A graph is formally defined as G = (V, E) where V is a set of vertices and E is a set of edges connecting pairs of vertices.
+                </div>
+            </div>
+
+            <div class="question-card" data-question="2" data-answer="c">
+                <div class="question-number">Question 2</div>
+                <div class="question-text">According to the Handshaking Lemma, the sum of all vertex degrees equals:</div>
+                <div class="options">
+                    <div class="option" data-option="a">A) |E|</div>
+                    <div class="option" data-option="b">B) |V|</div>
+                    <div class="option" data-option="c">C) 2|E|</div>
+                    <div class="option" data-option="d">D) 2|V|</div>
+                </div>
+                <div class="explanation">
+                    <strong>Correct!</strong> The Handshaking Lemma states Σ deg(v) = 2|E| because each edge contributes 2 to the total degree sum (one for each endpoint).
+                </div>
+            </div>
+
+            <div class="question-card" data-question="3" data-answer="a">
+                <div class="question-number">Question 3</div>
+                <div class="question-text">In any graph, the number of vertices with odd degree must be:</div>
+                <div class="options">
+                    <div class="option" data-option="a">A) Even</div>
+                    <div class="option" data-option="b">B) Odd</div>
+                    <div class="option" data-option="c">C) Zero</div>
+                    <div class="option" data-option="d">D) Prime</div>
+                </div>
+                <div class="explanation">
+                    <strong>Correct!</strong> Since Σ deg(v) = 2|E| (even number), and the sum of even-degree vertices is even, the sum of odd-degree vertices must also be even, requiring an even count of odd-degree vertices.
+                </div>
+            </div>
+
+            <div class="question-card" data-question="4" data-answer="d">
+                <div class="question-number">Question 4</div>
+                <div class="question-text">How many edges does a complete graph K₅ have?</div>
+                <div class="options">
+                    <div class="option" data-option="a">A) 5</div>
+                    <div class="option" data-option="b">B) 8</div>
+                    <div class="option" data-option="c">C) 9</div>
+                    <div class="option" data-option="d">D) 10</div>
+                </div>
+                <div class="explanation">
+                    <strong>Correct!</strong> Kₙ has n(n-1)/2 edges. For K₅: 5(4)/2 = 10 edges.
+                </div>
+            </div>
+
+            <div class="question-card" data-question="5" data-answer="b">
+                <div class="question-number">Question 5</div>
+                <div class="question-text">A tree with n vertices has exactly how many edges?</div>
+                <div class="options">
+                    <div class="option" data-option="a">A) n</div>
+                    <div class="option" data-option="b">B) n - 1</div>
+                    <div class="option" data-option="c">C) n + 1</div>
+                    <div class="option" data-option="d">D) n²</div>
+                </div>
+                <div class="explanation">
+                    <strong>Correct!</strong> A tree is a connected acyclic graph with exactly n-1 edges for n vertices.
+                </div>
+            </div>
+
+            <div class="question-card" data-question="6" data-answer="c">
+                <div class="question-number">Question 6</div>
+                <div class="question-text">If a graph has degree sequence [3, 3, 2, 2], how many edges does it have?</div>
+                <div class="options">
+                    <div class="option" data-option="a">A) 4</div>
+                    <div class="option" data-option="b">B) 10</div>
+                    <div class="option" data-option="c">C) 5</div>
+                    <div class="option" data-option="d">D) 8</div>
+                </div>
+                <div class="explanation">
+                    <strong>Correct!</strong> Sum of degrees = 3+3+2+2 = 10. By Handshaking Lemma: edges = 10/2 = 5.
+                </div>
+            </div>
+
+            <div class="question-card" data-question="7" data-answer="a">
+                <div class="question-number">Question 7</div>
+                <div class="question-text">Which type of graph has edges with specific direction?</div>
+                <div class="options">
+                    <div class="option" data-option="a">A) Directed graph (digraph)</div>
+                    <div class="option" data-option="b">B) Complete graph</div>
+                    <div class="option" data-option="c">C) Bipartite graph</div>
+                    <div class="option" data-option="d">D) Planar graph</div>
+                </div>
+                <div class="explanation">
+                    <strong>Correct!</strong> A directed graph (digraph) has edges with orientation, representing asymmetric relationships.
+                </div>
+            </div>
+
+            <div class="question-card" data-question="8" data-answer="b">
+                <div class="question-number">Question 8</div>
+                <div class="question-text">A graph is bipartite if and only if it contains:</div>
+                <div class="options">
+                    <div class="option" data-option="a">A) No cycles at all</div>
+                    <div class="option" data-option="b">B) No odd-length cycles</div>
+                    <div class="option" data-option="c">C) No even-length cycles</div>
+                    <div class="option" data-option="d">D) Exactly one cycle</div>
+                </div>
+                <div class="explanation">
+                    <strong>Correct!</strong> A graph is bipartite if and only if it contains no odd-length cycles (proven by 2-coloring).
+                </div>
+            </div>
+
+            <div class="question-card" data-question="9" data-answer="d">
+                <div class="question-number">Question 9</div>
+                <div class="question-text">What is the diameter of a complete graph Kₙ (n ≥ 2)?</div>
+                <div class="options">
+                    <div class="option" data-option="a">A) n</div>
+                    <div class="option" data-option="b">B) n-1</div>
+                    <div class="option" data-option="c">C) 2</div>
+                    <div class="option" data-option="d">D) 1</div>
+                </div>
+                <div class="explanation">
+                    <strong>Correct!</strong> In Kₙ, every pair of vertices is directly connected, so distance = 1 for all pairs. Diameter = 1.
+                </div>
+            </div>
+
+            <div class="question-card" data-question="10" data-answer="a">
+                <div class="question-number">Question 10</div>
+                <div class="question-text">A path is defined as a sequence of vertices where:</div>
+                <div class="options">
+                    <div class="option" data-option="a">A) All vertices are distinct (except possibly first and last)</div>
+                    <div class="option" data-option="b">B) All edges have the same weight</div>
+                    <div class="option" data-option="c">C) Vertices can repeat freely</div>
+                    <div class="option" data-option="d">D) Only even-degree vertices are used</div>
+                </div>
+                <div class="explanation">
+                    <strong>Correct!</strong> A path requires distinct vertices (except when first = last for cycles), ensuring no repetition.
+                </div>
+            </div>
+
+            <div class="question-card" data-question="11" data-answer="c">
+                <div class="question-number">Question 11</div>
+                <div class="question-text">If a simple graph has 6 vertices, what is the maximum number of edges it can have?</div>
+                <div class="options">
+                    <div class="option" data-option="a">A) 12</div>
+                    <div class="option" data-option="b">B) 18</div>
+                    <div class="option" data-option="c">C) 15</div>
+                    <div class="option" data-option="d">D) 30</div>
+                </div>
+                <div class="explanation">
+                    <strong>Correct!</strong> Maximum edges = C(n,2) = n(n-1)/2 = 6(5)/2 = 15 edges (complete graph K₆).
+                </div>
+            </div>
+
+            <div class="question-card" data-question="12" data-answer="b">
+                <div class="question-number">Question 12</div>
+                <div class="question-text">Can a graph have degree sequence [5, 4, 3, 2, 1]?</div>
+                <div class="options">
+                    <div class="option" data-option="a">A) Yes, always possible</div>
+                    <div class="option" data-option="b">B) No, sum is odd</div>
+                    <div class="option" data-option="c">C) Only if it's directed</div>
+                    <div class="option" data-option="d">D) Only if it has self-loops</div>
+                </div>
+                <div class="explanation">
+                    <strong>Correct!</strong> Sum = 5+4+3+2+1 = 15 (odd). By Handshaking Lemma, sum must be even (= 2|E|). Impossible!
+                </div>
+            </div>
+
+            <div class="question-card" data-question="13" data-answer="d">
+                <div class="question-number">Question 13</div>
+                <div class="question-text">Which of these is NOT a property of trees?</div>
+                <div class="options">
+                    <div class="option" data-option="a">A) Connected</div>
+                    <div class="option" data-option="b">B) Acyclic</div>
+                    <div class="option" data-option="c">C) Has n-1 edges for n vertices</div>
+                    <div class="option" data-option="d">D) Every vertex has even degree</div>
+                </div>
+                <div class="explanation">
+                    <strong>Correct!</strong> Trees don't require all vertices to have even degree. In fact, trees typically have leaves (degree 1 = odd).
+                </div>
+            </div>
+
+            <div class="question-card" data-question="14" data-answer="c">
+                <div class="question-number">Question 14</div>
+                <div class="question-text">What does "connected" mean for a graph?</div>
+                <div class="options">
+                    <div class="option" data-option="a">A) All vertices have the same degree</div>
+                    <div class="option" data-option="b">B) It has no cycles</div>
+                    <div class="option" data-option="c">C) There exists a path between every pair of vertices</div>
+                    <div class="option" data-option="d">D) All edges have equal weight</div>
+                </div>
+                <div class="explanation">
+                    <strong>Correct!</strong> A graph is connected if and only if there exists a path between every pair of vertices.
+                </div>
+            </div>
+
+            <div class="question-card" data-question="15" data-answer="a">
+                <div class="question-number">Question 15</div>
+                <div class="question-text">In a group of 10 people, what's the minimum number with the same number of acquaintances?</div>
+                <div class="options">
+                    <div class="option" data-option="a">A) At least 2</div>
+                    <div class="option" data-option="b">B) At least 3</div>
+                    <div class="option" data-option="c">C) At least 5</div>
+                    <div class="option" data-option="d">D) Could be 0 or 1</div>
+                </div>
+                <div class="explanation">
+                    <strong>Correct!</strong> Pigeonhole principle: 10 people, but only 9 possible degree values (0-9 not all simultaneously possible), so at least 2 share the same degree.
+                </div>
+            </div>
+
+            <!-- Module 2: Graph Representations (12 questions) -->
+            <div class="category-header">
+                <h2>💾 Module 2: Graph Representation Methods</h2>
+            </div>
+
+            <div class="question-card" data-question="16" data-answer="b">
+                <div class="question-number">Question 16</div>
+                <div class="question-text">What is the space complexity of an adjacency matrix for a graph with n vertices?</div>
+                <div class="options">
+                    <div class="option" data-option="a">A) O(n)</div>
+                    <div class="option" data-option="b">B) O(n²)</div>
+                    <div class="option" data-option="c">C) O(n log n)</div>
+                    <div class="option" data-option="d">D) O(n + m)</div>
+                </div>
+                <div class="explanation">
+                    <strong>Correct!</strong> Adjacency matrix is n × n, requiring O(n²) space regardless of edge count.
+                </div>
+            </div>
+
+            <div class="question-card" data-question="17" data-answer="d">
+                <div class="question-number">Question 17</div>
+                <div class="question-text">What is the space complexity of an adjacency list?</div>
+                <div class="options">
+                    <div class="option" data-option="a">A) O(n²)</div>
+                    <div class="option" data-option="b">B) O(n)</div>
+                    <div class="option" data-option="c">C) O(m)</div>
+                    <div class="option" data-option="d">D) O(n + m)</div>
+                </div>
+                <div class="explanation">
+                    <strong>Correct!</strong> Adjacency list requires O(n) for vertex array plus O(m) for edge storage = O(n + m) total.
+                </div>
+            </div>
+
+            <div class="question-card" data-question="18" data-answer="a">
+                <div class="question-number">Question 18</div>
+                <div class="question-text">Time complexity to check if edge (u,v) exists in adjacency matrix?</div>
+                <div class="options">
+                    <div class="option" data-option="a">A) O(1)</div>
+                    <div class="option" data-option="b">B) O(n)</div>
+                    <div class="option" data-option="c">C) O(log n)</div>
+                    <div class="option" data-option="d">D) O(m)</div>
+                </div>
+                <div class="explanation">
+                    <strong>Correct!</strong> Direct array access: check A[u][v] in constant time O(1).
+                </div>
+            </div>
+
+            <div class="question-card" data-question="19" data-answer="c">
+                <div class="question-number">Question 19</div>
+                <div class="question-text">For adjacency matrix A, what does A³[i][j] represent?</div>
+                <div class="options">
+                    <div class="option" data-option="a">A) Whether vertices i and j are adjacent</div>
+                    <div class="option" data-option="b">B) Distance between i and j</div>
+                    <div class="option" data-option="c">C) Number of paths of length 3 from i to j</div>
+                    <div class="option" data-option="d">D) The 3rd shortest path</div>
+                </div>
+                <div class="explanation">
+                    <strong>Correct!</strong> Matrix power Aᵏ[i][j] counts paths of length k from i to j.
+                </div>
+            </div>
+
+            <div class="question-card" data-question="20" data-answer="b">
+                <div class="question-number">Question 20</div>
+                <div class="question-text">In adjacency list for undirected graph with m edges, total list length equals:</div>
+                <div class="options">
+                    <div class="option" data-option="a">A) m</div>
+                    <div class="option" data-option="b">B) 2m</div>
+                    <div class="option" data-option="c">C) m²</div>
+                    <div class="option" data-option="d">D) n + m</div>
+                </div>
+                <div class="explanation">
+                    <strong>Correct!</strong> Each edge appears twice: once in each endpoint's list. Total = 2m entries.
+                </div>
+            </div>
+
+            <div class="question-card" data-question="21" data-answer="d">
+                <div class="question-number">Question 21</div>
+                <div class="question-text">Which representation is best for sparse graphs (m ≪ n²)?</div>
+                <div class="options">
+                    <div class="option" data-option="a">A) Adjacency matrix</div>
+                    <div class="option" data-option="b">B) Incidence matrix</div>
+                    <div class="option" data-option="c">C) Edge list</div>
+                    <div class="option" data-option="d">D) Adjacency list</div>
+                </div>
+                <div class="explanation">
+                    <strong>Correct!</strong> Adjacency list is space-efficient O(n+m), optimal when m ≪ n² (sparse graphs).
+                </div>
+            </div>
+
+            <div class="question-card" data-question="22" data-answer="a">
+                <div class="question-number">Question 22</div>
+                <div class="question-text">For undirected graph, adjacency matrix is always:</div>
+                <div class="options">
+                    <div class="option" data-option="a">A) Symmetric</div>
+                    <div class="option" data-option="b">B) Diagonal</div>
+                    <div class="option" data-option="c">C) Upper triangular</div>
+                    <div class="option" data-option="d">D) Sparse</div>
+                </div>
+                <div class="explanation">
+                    <strong>Correct!</strong> Undirected edges mean A[i][j] = A[j][i], making the matrix symmetric.
+                </div>
+            </div>
+
+            <div class="question-card" data-question="23" data-answer="c">
+                <div class="question-number">Question 23</div>
+                <div class="question-text">Facebook graph (2.8B users, avg 200 friends) should use which representation?</div>
+                <div class="options">
+                    <div class="option" data-option="a">A) Adjacency matrix (more efficient)</div>
+                    <div class="option" data-option="b">B) Edge list</div>
+                    <div class="option" data-option="c">C) Adjacency list (saves 99.9%+ space)</div>
+                    <div class="option" data-option="d">D) All equally efficient</div>
+                </div>
+                <div class="explanation">
+                    <strong>Correct!</strong> Matrix: 7.8 exabytes. List: 4.5 terabytes. Adjacency list saves over 1 million times space!
+                </div>
+            </div>
+
+            <div class="question-card" data-question="24" data-answer="b">
+                <div class="question-number">Question 24</div>
+                <div class="question-text">If adjacency matrix sum of all entries is 30 (undirected graph), how many edges?</div>
+                <div class="options">
+                    <div class="option" data-option="a">A) 30</div>
+                    <div class="option" data-option="b">B) 15</div>
+                    <div class="option" data-option="c">C) 60</div>
+                    <div class="option" data-option="d">D) 10</div>
+                </div>
+                <div class="explanation">
+                    <strong>Correct!</strong> Each edge counted twice in undirected matrix. Total 1s = 2m, so 30 = 2m → m = 15.
+                </div>
+            </div>
+
+            <div class="question-card" data-question="25" data-answer="d">
+                <div class="question-number">Question 25</div>
+                <div class="question-text">Edge list representation is most suitable for:</div>
+                <div class="options">
+                    <div class="option" data-option="a">A) Frequent edge existence queries</div>
+                    <div class="option" data-option="b">B) Finding all neighbors quickly</div>
+                    <div class="option" data-option="c">C) Random access to vertices</div>
+                    <div class="option" data-option="d">D) Algorithms that iterate over all edges</div>
+                </div>
+                <div class="explanation">
+                    <strong>Correct!</strong> Edge list is simple and efficient when you need to process all edges sequentially (e.g., Kruskal's MST).
+                </div>
+            </div>
+
+            <div class="question-card" data-question="26" data-answer="a">
+                <div class="question-number">Question 26</div>
+                <div class="question-text">Time to iterate all neighbors of vertex v in adjacency list?</div>
+                <div class="options">
+                    <div class="option" data-option="a">A) O(deg(v))</div>
+                    <div class="option" data-option="b">B) O(n)</div>
+                    <div class="option" data-option="c">C) O(m)</div>
+                    <div class="option" data-option="d">D) O(1)</div>
+                </div>
+                <div class="explanation">
+                    <strong>Correct!</strong> Just traverse v's list which has deg(v) entries. Optimal time O(deg(v)).
+                </div>
+            </div>
+
+            <div class="question-card" data-question="27" data-answer="c">
+                <div class="question-number">Question 27</div>
+                <div class="question-text">What is the best choice for dense graphs (m ≈ n²)?</div>
+                <div class="options">
+                    <div class="option" data-option="a">A) Edge list</div>
+                    <div class="option" data-option="b">B) Adjacency list</div>
+                    <div class="option" data-option="c">C) Adjacency matrix</div>
+                    <div class="option" data-option="d">D) Incidence matrix</div>
+                </div>
+                <div class="explanation">
+                    <strong>Correct!</strong> When m ≈ n², matrix space O(n²) matches edge count, with benefit of O(1) edge queries.
+                </div>
+            </div>
+
+            <!-- Module 3: Planar Graphs (13 questions) -->
+            <div class="category-header">
+                <h2>🗺️ Module 3: Planar Graphs & Coloring</h2>
+            </div>
+
+            <div class="question-card" data-question="28" data-answer="a">
+                <div class="question-number">Question 28</div>
+                <div class="question-text">Euler's formula for connected planar graph states:</div>
+                <div class="options">
+                    <div class="option" data-option="a">A) v - e + f = 2</div>
+                    <div class="option" data-option="b">B) v + e + f = 2</div>
+                    <div class="option" data-option="c">C) v - e - f = 2</div>
+                    <div class="option" data-option="d">D) v² - e + f = 2</div>
+                </div>
+                <div class="explanation">
+                    <strong>Correct!</strong> Euler's formula: vertices - edges + faces = 2 for connected planar graphs.
+                </div>
+            </div>
+
+            <div class="question-card" data-question="29" data-answer="b">
+                <div class="question-number">Question 29</div>
+                <div class="question-text">For planar graph with v ≥ 3, maximum edges satisfy:</div>
+                <div class="options">
+                    <div class="option" data-option="a">A) e ≤ 2v - 6</div>
+                    <div class="option" data-option="b">B) e ≤ 3v - 6</div>
+                    <div class="option" data-option="c">C) e ≤ v² - 6</div>
+                    <div class="option" data-option="d">D) e ≤ 4v - 8</div>
+                </div>
+                <div class="explanation">
+                    <strong>Correct!</strong> Planar graph bound: e ≤ 3v - 6 (derived from Euler's formula with face degree ≥ 3).
+                </div>
+            </div>
+
+            <div class="question-card" data-question="30" data-answer="a">
+                <div class="question-number">Question 30</div>
+                <div class="question-text">Is K₅ planar?</div>
+                <div class="options">
+                    <div class="option" data-option="a">A) No, violates edge bound (10 > 9)</div>
+                    <div class="option" data-option="b">B) Yes, can be drawn without crossings</div>
+                    <div class="option" data-option="c">C) Only if we allow curved edges</div>
+                    <div class="option" data-option="d">D) Yes, but only in 3D space</div>
+                </div>
+                <div class="explanation">
+                    <strong>Correct!</strong> K₅ has v=5, e=10. Planar requires e ≤ 3v-6 = 9. Since 10 > 9, K₅ is NOT planar.
+                </div>
+            </div>
+
+            <div class="question-card" data-question="31" data-answer="d">
+                <div class="question-number">Question 31</div>
+                <div class="question-text">Planar graph with 8 vertices and 12 edges has how many faces?</div>
+                <div class="options">
+                    <div class="option" data-option="a">A) 4</div>
+                    <div class="option" data-option="b">B) 5</div>
+                    <div class="option" data-option="c">C) 8</div>
+                    <div class="option" data-option="d">D) 6</div>
+                </div>
+                <div class="explanation">
+                    <strong>Correct!</strong> Using v - e + f = 2: 8 - 12 + f = 2 → f = 6 faces.
+                </div>
+            </div>
+
+            <div class="question-card" data-question="32" data-answer="b">
+                <div class="question-number">Question 32</div>
+                <div class="question-text">Is K₃,₃ (complete bipartite) planar?</div>
+                <div class="options">
+                    <div class="option" data-option="a">A) Yes, it's bipartite so always planar</div>
+                    <div class="option" data-option="b">B) No, violates bound for graphs with no triangles</div>
+                    <div class="option" data-option="c">C) Yes, can be embedded on a torus</div>
+                    <div class="option" data-option="d">D) Depends on edge weights</div>
+                </div>
+                <div class="explanation">
+                    <strong>Correct!</strong> K₃,₃ has v=6, e=9, no triangles. Bound: e ≤ 2v-4 = 8. Since 9 > 8, NOT planar.
+                </div>
+            </div>
+
+            <div class="question-card" data-question="33" data-answer="c">
+                <div class="question-number">Question 33</div>
+                <div class="question-text">According to Kuratowski's theorem, a graph is planar if and only if:</div>
+                <div class="options">
+                    <div class="option" data-option="a">A) It has fewer than 10 vertices</div>
+                    <div class="option" data-option="b">B) All vertices have degree ≤ 5</div>
+                    <div class="option" data-option="c">C) It contains no K₅ or K₃,₃ subdivision</div>
+                    <div class="option" data-option="d">D) It can be 4-colored</div>
+                </div>
+                <div class="explanation">
+                    <strong>Correct!</strong> Kuratowski: graph is planar ⟺ no subgraph is subdivision of K₅ or K₃,₃.
+                </div>
+            </div>
+
+            <div class="question-card" data-question="34" data-answer="d">
+                <div class="question-number">Question 34</div>
+                <div class="question-text">In planar embedding, sum of all face degrees equals:</div>
+                <div class="options">
+                    <div class="option" data-option="a">A) e</div>
+                    <div class="option" data-option="b">B) v</div>
+                    <div class="option" data-option="c">C) 2v</div>
+                    <div class="option" data-option="d">D) 2e</div>
+                </div>
+                <div class="explanation">
+                    <strong>Correct!</strong> Like Handshaking Lemma for vertices: Σ deg(face) = 2e (each edge borders two faces or one face twice).
+                </div>
+            </div>
+
+            <div class="question-card" data-question="35" data-answer="a">
+                <div class="question-number">Question 35</div>
+                <div class="question-text">Every planar graph has at least one vertex with degree:</div>
+                <div class="options">
+                    <div class="option" data-option="a">A) ≤ 5</div>
+                    <div class="option" data-option="b">B) ≤ 3</div>
+                    <div class="option" data-option="c">C) ≤ 6</div>
+                    <div class="option" data-option="d">D) = 4</div>
+                </div>
+                <div class="explanation">
+                    <strong>Correct!</strong> If all vertices had degree ≥ 6, then 2e ≥ 6v → e ≥ 3v, contradicting e ≤ 3v-6. So some vertex has deg ≤ 5.
+                </div>
+            </div>
+
+            <div class="question-card" data-question="36" data-answer="b">
+                <div class="question-number">Question 36</div>
+                <div class="question-text">A tree with 10 vertices drawn in plane has how many faces?</div>
+                <div class="options">
+                    <div class="option" data-option="a">A) 2</div>
+                    <div class="option" data-option="b">B) 1</div>
+                    <div class="option" data-option="c">C) 10</div>
+                    <div class="option" data-option="d">D) 9</div>
+                </div>
+                <div class="explanation">
+                    <strong>Correct!</strong> Tree: v=10, e=9. Euler: 10-9+f=2 → f=1 (only the outer unbounded face).
+                </div>
+            </div>
+
+            <div class="question-card" data-question="37" data-answer="d">
+                <div class="question-number">Question 37</div>
+                <div class="question-text">The Four Color Theorem states that every planar graph can be vertex-colored with:</div>
+                <div class="options">
+                    <div class="option" data-option="a">A) 2 colors</div>
+                    <div class="option" data-option="b">B) 3 colors</div>
+                    <div class="option" data-option="c">C) 5 colors</div>
+                    <div class="option" data-option="d">D) 4 colors</div>
+                </div>
+                <div class="explanation">
+                    <strong>Correct!</strong> Four Color Theorem (Appel-Haken, 1976): every planar graph is 4-colorable.
+                </div>
+            </div>
+
+            <div class="question-card" data-question="38" data-answer="c">
+                <div class="question-number">Question 38</div>
+                <div class="question-text">Cube graph has 8 vertices and 12 edges. How many faces in its dual graph?</div>
+                <div class="options">
+                    <div class="option" data-option="a">A) 6</div>
+                    <div class="option" data-option="b">B) 12</div>
+                    <div class="option" data-option="c">C) 8</div>
+                    <div class="option" data-option="d">D) 14</div>
+                </div>
+                <div class="explanation">
+                    <strong>Correct!</strong> Dual graph swaps vertices and faces. Cube has f=6 (→ dual has v*=6). Dual of cube is octahedron with f*=8.
+                </div>
+            </div>
+
+            <div class="question-card" data-question="39" data-answer="a">
+                <div class="question-number">Question 39</div>
+                <div class="question-text">Can a planar graph have all vertices with degree 6 and 8 total vertices?</div>
+                <div class="options">
+                    <div class="option" data-option="a">A) No, violates planar bound</div>
+                    <div class="option" data-option="b">B) Yes, if properly arranged</div>
+                    <div class="option" data-option="c">C) Only in 3D</div>
+                    <div class="option" data-option="d">D) Yes, as a complete graph</div>
+                </div>
+                <div class="explanation">
+                    <strong>Correct!</strong> All deg=6 → 2e=48 → e=24. Planar: e≤3v-6=18. Since 24>18, impossible!
+                </div>
+            </div>
+
+            <div class="question-card" data-question="40" data-answer="b">
+                <div class="question-number">Question 40</div>
+                <div class="question-text">K₄ (complete graph on 4 vertices) is:</div>
+                <div class="options">
+                    <div class="option" data-option="a">A) Not planar</div>
+                    <div class="option" data-option="b">B) Planar (can draw as tetrahedron projection)</div>
+                    <div class="option" data-option="c">C) Only planar on sphere</div>
+                    <div class="option" data-option="d">D) Bipartite and planar</div>
+                </div>
+                <div class="explanation">
+                    <strong>Correct!</strong> K₄ has v=4, e=6. Check: 6 ≤ 3(4)-6 = 6 ✓. K₄ IS planar (triangle with interior point).
+                </div>
+            </div>
+
+            <!-- Module 4: Spanning Trees (12 questions) -->
+            <div class="category-header">
+                <h2>🌳 Module 4: Spanning Trees & MST Algorithms</h2>
+            </div>
+
+            <div class="question-card" data-question="41" data-answer="b">
+                <div class="question-number">Question 41</div>
+                <div class="question-text">A spanning tree of a graph with n vertices has how many edges?</div>
+                <div class="options">
+                    <div class="option" data-option="a">A) n</div>
+                    <div class="option" data-option="b">B) n - 1</div>
+                    <div class="option" data-option="c">C) n + 1</div>
+                    <div class="option" data-option="d">D) n(n-1)/2</div>
+                </div>
+                <div class="explanation">
+                    <strong>Correct!</strong> Spanning tree includes all n vertices and is a tree → exactly n-1 edges.
+                </div>
+            </div>
+
+            <div class="question-card" data-question="42" data-answer="d">
+                <div class="question-number">Question 42</div>
+                <div class="question-text">How many spanning trees does K₅ have (Cayley's formula)?</div>
+                <div class="options">
+                    <div class="option" data-option="a">A) 25</div>
+                    <div class="option" data-option="b">B) 60</div>
+                    <div class="option" data-option="c">C) 100</div>
+                    <div class="option" data-option="d">D) 125</div>
+                </div>
+                <div class="explanation">
+                    <strong>Correct!</strong> Cayley's formula: Kₙ has n^(n-2) spanning trees. K₅: 5³ = 125.
+                </div>
+            </div>
+
+            <div class="question-card" data-question="43" data-answer="c">
+                <div class="question-number">Question 43</div>
+                <div class="question-text">Kruskal's algorithm sorts edges by:</div>
+                <div class="options">
+                    <div class="option" data-option="a">A) Vertex degree</div>
+                    <div class="option" data-option="b">B) Edge direction</div>
+                    <div class="option" data-option="c">C) Weight (ascending)</div>
+                    <div class="option" data-option="d">D) Alphabetically</div>
+                </div>
+                <div class="explanation">
+                    <strong>Correct!</strong> Kruskal sorts all edges by weight (ascending) then adds cheapest edges that don't create cycles.
+                </div>
+            </div>
+
+            <div class="question-card" data-question="44" data-answer="a">
+                <div class="question-number">Question 44</div>
+                <div class="question-text">Prim's algorithm starts with:</div>
+                <div class="options">
+                    <div class="option" data-option="a">A) Arbitrary single vertex</div>
+                    <div class="option" data-option="b">B) All vertices</div>
+                    <div class="option" data-option="c">C) Minimum weight edge</div>
+                    <div class="option" data-option="d">D) Maximum degree vertex</div>
+                </div>
+                <div class="explanation">
+                    <strong>Correct!</strong> Prim starts from any single vertex and grows the tree by adding nearest vertices.
+                </div>
+            </div>
+
+            <div class="question-card" data-question="45" data-answer="b">
+                <div class="question-number">Question 45</div>
+                <div class="question-text">Time complexity of Kruskal's algorithm is:</div>
+                <div class="options">
+                    <div class="option" data-option="a">A) O(n²)</div>
+                    <div class="option" data-option="b">B) O(m log m)</div>
+                    <div class="option" data-option="c">C) O(n log n)</div>
+                    <div class="option" data-option="d">D) O(m + n)</div>
+                </div>
+                <div class="explanation">
+                    <strong>Correct!</strong> Dominated by sorting edges: O(m log m) where m is number of edges.
+                </div>
+            </div>
+
+            <div class="question-card" data-question="46" data-answer="d">
+                <div class="question-number">Question 46</div>
+                <div class="question-text">The Cut Property states that minimum weight edge crossing any cut:</div>
+                <div class="options">
+                    <div class="option" data-option="a">A) Must be avoided</div>
+                    <div class="option" data-option="b">B) Creates a cycle</div>
+                    <div class="option" data-option="c">C) Is always heaviest</div>
+                    <div class="option" data-option="d">D) Is in some MST</div>
+                </div>
+                <div class="explanation">
+                    <strong>Correct!</strong> Cut Property: minimum weight edge crossing any cut (S, V-S) belongs to some MST.
+                </div>
+            </div>
+
+            <div class="question-card" data-question="47" data-answer="c">
+                <div class="question-number">Question 47</div>
+                <div class="question-text">The Cycle Property states that maximum weight edge in any cycle:</div>
+                <div class="options">
+                    <div class="option" data-option="a">A) Must be in MST</div>
+                    <div class="option" data-option="b">B) Might be in MST</div>
+                    <div class="option" data-option="c">C) Is NOT in any MST (if weights distinct)</div>
+                    <div class="option" data-option="d">D) Creates new components</div>
+                </div>
+                <div class="explanation">
+                    <strong>Correct!</strong> Cycle Property: maximum weight edge in cycle is not in any MST (assuming distinct weights).
+                </div>
+            </div>
+
+            <div class="question-card" data-question="48" data-answer="b">
+                <div class="question-number">Question 48</div>
+                <div class="question-text">Which algorithm is better for sparse graphs?</div>
+                <div class="options">
+                    <div class="option" data-option="a">A) Prim's</div>
+                    <div class="option" data-option="b">B) Kruskal's</div>
+                    <div class="option" data-option="c">C) Both equal</div>
+                    <div class="option" data-option="d">D) Dijkstra's</div>
+                </div>
+                <div class="explanation">
+                    <strong>Correct!</strong> Kruskal is better for sparse graphs (m ≈ n) with O(m log m) ≈ O(n log n).
+                </div>
+            </div>
+
+            <div class="question-card" data-question="49" data-answer="a">
+                <div class="question-number">Question 49</div>
+                <div class="question-text">If all edge weights are distinct, the MST is:</div>
+                <div class="options">
+                    <div class="option" data-option="a">A) Unique</div>
+                    <div class="option" data-option="b">B) Has exactly 2 possibilities</div>
+                    <div class="option" data-option="c">C) Has n possibilities</div>
+                    <div class="option" data-option="d">D) May not exist</div>
+                </div>
+                <div class="explanation">
+                    <strong>Correct!</strong> Distinct weights guarantee unique MST (no ties in edge selection).
+                </div>
+            </div>
+
+            <div class="question-card" data-question="50" data-answer="c">
+                <div class="question-number">Question 50</div>
+                <div class="question-text">Kruskal uses which data structure for cycle detection?</div>
+                <div class="options">
+                    <div class="option" data-option="a">A) Stack</div>
+                    <div class="option" data-option="b">B) Queue</div>
+                    <div class="option" data-option="c">C) Union-Find (Disjoint Set)</div>
+                    <div class="option" data-option="d">D) Binary Tree</div>
+                </div>
+                <div class="explanation">
+                    <strong>Correct!</strong> Union-Find efficiently checks if vertices are in same component (would create cycle).
+                </div>
+            </div>
+
+            <div class="question-card" data-question="51" data-answer="b">
+                <div class="question-number">Question 51</div>
+                <div class="question-text">Graph with edges AB(2), AC(5), BC(1), BD(4), CD(3). What's MST weight?</div>
+                <div class="options">
+                    <div class="option" data-option="a">A) 8</div>
+                    <div class="option" data-option="b">B) 6</div>
+                    <div class="option" data-option="c">C) 10</div>
+                    <div class="option" data-option="d">D) 7</div>
+                </div>
+                <div class="explanation">
+                    <strong>Correct!</strong> Sort: BC(1), AB(2), CD(3), BD(4), AC(5). Take BC+AB+CD = 1+2+3 = 6.
+                </div>
+            </div>
+
+            <div class="question-card" data-question="52" data-answer="d">
+                <div class="question-number">Question 52</div>
+                <div class="question-text">Adding any edge to a spanning tree creates exactly:</div>
+                <div class="options">
+                    <div class="option" data-option="a">A) Two cycles</div>
+                    <div class="option" data-option="b">B) No cycles (still tree)</div>
+                    <div class="option" data-option="c">C) Disconnected graph</div>
+                    <div class="option" data-option="d">D) One cycle</div>
+                </div>
+                <div class="explanation">
+                    <strong>Correct!</strong> Tree already connects endpoints via unique path. Adding edge creates exactly one cycle using that path.
+                </div>
+            </div>
+        </div>
+
+        <div class="quiz-actions">
+            <button class="btn-quiz btn-restart" onclick="restartQuiz()">Restart Quiz</button>
+        </div>
+
+        <div class="score-display" id="final-score" style="display: none;">
+            <h2>Quiz Complete! 🎉</h2>
+            <div class="score-number" id="score-percentage">0%</div>
+            <p id="score-message"></p>
+            <p id="score-details"></p>
+        </div>
+
+        <a href="index.html" class="back-link" style="margin-top: 30px;">← Back to Modules</a>
+    </div>
+
+    <script>
+        let answers = {};
+        let score = 0;
+        let answered = 0;
+        const totalQuestions = 52;
+
+        // Add click handlers to all options
+        document.querySelectorAll('.option').forEach(option => {
+            option.addEventListener('click', function() {
+                const card = this.closest('.question-card');
+                const questionNum = card.dataset.question;
+                const selectedOption = this.dataset.option;
+                const correctAnswer = card.dataset.answer;
+                const explanation = card.querySelector('.explanation');
+                
+                // Check if already answered
+                const alreadyAnswered = answers[questionNum];
+                
+                // Remove previous selection
+                card.querySelectorAll('.option').forEach(opt => {
+                    opt.classList.remove('selected', 'correct', 'incorrect');
+                });
+                
+                // Mark this option as selected
+                this.classList.add('selected');
+                
+                // Show correct/incorrect immediately
+                if (selectedOption === correctAnswer) {
+                    this.classList.add('correct');
+                    if (!alreadyAnswered) score++;
+                } else {
+                    this.classList.add('incorrect');
+                    // Also highlight the correct answer
+                    card.querySelectorAll('.option').forEach(opt => {
+                        if (opt.dataset.option === correctAnswer) {
+                            opt.classList.add('correct');
+                        }
+                    });
+                }
+                
+                // Show explanation immediately
+                explanation.classList.add('show');
+                
+                // Disable further clicks on this question
+                card.querySelectorAll('.option').forEach(opt => {
+                    opt.style.pointerEvents = 'none';
+                });
+                
+                // Store answer
+                if (!alreadyAnswered) {
+                    answered++;
+                    document.getElementById('current-score').textContent = score;
+                }
+                answers[questionNum] = selectedOption;
+                
+                // Update progress
+                updateProgress();
+            });
+        });
+
+        function updateProgress() {
+            document.getElementById('current-q').textContent = answered;
+            document.getElementById('answered').textContent = answered;
+            const percentage = (answered / totalQuestions) * 100;
+            document.getElementById('progress-fill').style.width = percentage + '%';
+        }
+
+        function submitAllAnswers() {
+            if (answered < totalQuestions) {
+                alert(`Please answer all questions first! (${answered}/${totalQuestions} answered)`);
+                return;
+            }
+
+            // Show final score
+            const percentage = Math.round((score / totalQuestions) * 100);
+            document.getElementById('score-percentage').textContent = percentage + '%';
+            document.getElementById('score-details').textContent = `You got ${score} out of ${totalQuestions} questions correct!`;
+            
+            let message = '';
+            if (percentage >= 90) message = '🏆 Outstanding! You have mastered graph theory!';
+            else if (percentage >= 80) message = '🌟 Excellent work! Strong understanding!';
+            else if (percentage >= 70) message = '👍 Good job! Keep studying to improve!';
+            else if (percentage >= 60) message = '📚 Fair attempt. Review the theory lectures.';
+            else message = '💪 Keep learning! Review all modules carefully.';
+            
+            document.getElementById('score-message').textContent = message;
+            document.getElementById('final-score').style.display = 'block';
+
+            // Scroll to score
+            document.getElementById('final-score').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function restartQuiz() {
+            if (!confirm('Are you sure you want to restart? All answers will be cleared.')) {
+                return;
+            }
+            
+            answers = {};
+            score = 0;
+            answered = 0;
+            
+            document.querySelectorAll('.option').forEach(opt => {
+                opt.classList.remove('selected', 'correct', 'incorrect');
+                opt.style.pointerEvents = 'auto';
+            });
+            
+            document.querySelectorAll('.explanation').forEach(exp => {
+                exp.classList.remove('show');
+            });
+            
+            document.getElementById('final-score').style.display = 'none';
+            updateProgress();
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

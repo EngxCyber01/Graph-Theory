@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fundamentals - Complete Theory</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <header class="lecture-header">
+        <h1 class="lecture-title">Module 01: Complete Theory</h1>
+        <p class="lecture-subtitle">Fundamentals of Graph Theory</p>
+    </header>
+
+    <div class="content-wrapper">
+        <a href="../index.html" class="back-link">← Return to Modules</a>
+
+        <div class="theory-section">
+            <h2>1. Introduction to Graphs</h2>
+            <div class="definition">
+                <strong>Definition 1.1:</strong> A <em>graph</em> G = (V, E) consists of:
+                <ul>
+                    <li>V: a finite set of vertices (or nodes)</li>
+                    <li>E: a set of edges connecting pairs of vertices</li>
+                </ul>
+            </div>
+
+            <div class="concept-box">
+                <h3>Notation & Terminology</h3>
+                <ul>
+                    <li><strong>Order:</strong> |V| = number of vertices</li>
+                    <li><strong>Size:</strong> |E| = number of edges</li>
+                    <li><strong>Adjacent vertices:</strong> Connected by an edge</li>
+                    <li><strong>Incident edge:</strong> Edge connecting to a vertex</li>
+                    <li><strong>Neighbors:</strong> Set of all adjacent vertices</li>
+                </ul>
+            </div>
+
+            <div class="example-box">
+                <h4>Example 1.1:</h4>
+                <p>Consider graph G with:</p>
+                <ul>
+                    <li>V = {A, B, C, D}</li>
+                    <li>E = {AB, AC, BC, CD}</li>
+                </ul>
+                <p>Analysis:</p>
+                <ul>
+                    <li>Order = 4 vertices</li>
+                    <li>Size = 4 edges</li>
+                    <li>A is adjacent to B and C</li>
+                    <li>Neighbors of C: {A, B, D}</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="theory-section">
+            <h2>2. Degree of a Vertex</h2>
+            <div class="definition">
+                <strong>Definition 2.1:</strong> The <em>degree</em> of a vertex v, denoted deg(v), is the number of edges incident to v.
+            </div>
+
+            <div class="theorem-box">
+                <strong>Theorem 2.1 (Handshaking Lemma):</strong><br>
+                For any graph G = (V, E): Σ<sub>v∈V</sub> deg(v) = 2|E|
+                <br><br>
+                <strong>Proof:</strong> Each edge contributes 2 to the total degree sum (one for each endpoint). Therefore, summing all degrees counts each edge exactly twice.
+            </div>
+
+            <div class="theorem-box">
+                <strong>Corollary 2.1:</strong> In any graph, the number of vertices with odd degree is even.
+                <br><br>
+                <strong>Proof:</strong> Let O = set of odd-degree vertices, E = set of even-degree vertices.
+                By Handshaking Lemma: Σ deg(v) = 2|E| (even number)
+                <br>
+                Since Σ<sub>v∈E</sub> deg(v) is even (sum of even numbers), 
+                <br>
+                Σ<sub>v∈O</sub> deg(v) must also be even.
+                <br>
+                An even sum of odd numbers requires an even count. ∎
+            </div>
+
+            <div class="example-box">
+                <h4>Example 2.1:</h4>
+                <p>Graph with degree sequence [3, 3, 2, 2, 2]</p>
+                <ul>
+                    <li>Sum of degrees: 3+3+2+2+2 = 12</li>
+                    <li>Number of edges: 12/2 = 6</li>
+                    <li>Odd degree vertices: 2 (even count ✓)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="theory-section">
+            <h2>3. Types of Graphs</h2>
+            
+            <div class="concept-box">
+                <h3>3.1 Directed vs Undirected</h3>
+                <ul>
+                    <li><strong>Undirected:</strong> Edges have no orientation (e.g., friendship)</li>
+                    <li><strong>Directed (Digraph):</strong> Edges have direction (e.g., Twitter follows)</li>
+                    <li>In digraphs: <em>in-degree</em> and <em>out-degree</em></li>
+                </ul>
+            </div>
+
+            <div class="concept-box">
+                <h3>3.2 Weighted Graphs</h3>
+                <ul>
+                    <li>Each edge e has a weight w(e) ∈ ℝ</li>
+                    <li>Represents cost, distance, capacity, etc.</li>
+                    <li>Used in shortest path problems</li>
+                </ul>
+            </div>
+
+            <div class="definition">
+                <strong>Definition 3.1:</strong> A <em>simple graph</em> has:
+                <ul>
+                    <li>No multiple edges between same vertices</li>
+                    <li>No self-loops (edges from vertex to itself)</li>
+                </ul>
+            </div>
+
+            <div class="definition">
+                <strong>Definition 3.2:</strong> A <em>complete graph</em> K<sub>n</sub> is a simple graph where every pair of distinct vertices is connected by an edge.
+            </div>
+
+            <div class="formula">
+                Number of edges in K<sub>n</sub>: |E| = n(n-1)/2 = C(n,2)
+            </div>
+
+            <div class="example-box">
+                <h4>Example 3.1:</h4>
+                <p>Complete graphs:</p>
+                <ul>
+                    <li>K<sub>3</sub>: Triangle (3 vertices, 3 edges)</li>
+                    <li>K<sub>4</sub>: 4 vertices, 6 edges</li>
+                    <li>K<sub>5</sub>: 5 vertices, 10 edges</li>
+                    <li>K<sub>n</sub>: n vertices, n(n-1)/2 edges</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="theory-section">
+            <h2>4. Special Graph Types</h2>
+
+            <div class="definition">
+                <strong>Definition 4.1:</strong> A <em>bipartite graph</em> G = (V, E) has vertex set V = A ∪ B where:
+                <ul>
+                    <li>A ∩ B = ∅</li>
+                    <li>Every edge connects a vertex in A to a vertex in B</li>
+                </ul>
+            </div>
+
+            <div class="theorem-box">
+                <strong>Theorem 4.1:</strong> A graph is bipartite if and only if it contains no odd-length cycles.
+            </div>
+
+            <div class="definition">
+                <strong>Definition 4.2:</strong> A <em>tree</em> is a connected graph with no cycles.
+            </div>
+
+            <div class="theorem-box">
+                <strong>Theorem 4.2:</strong> For a tree T with n vertices: |E| = n - 1
+            </div>
+
+            <div class="example-box">
+                <h4>Example 4.1:</h4>
+                <p>Real-world applications:</p>
+                <ul>
+                    <li><strong>Bipartite:</strong> Job assignments (workers ↔ jobs)</li>
+                    <li><strong>Tree:</strong> Organization hierarchy, file systems</li>
+                    <li><strong>Complete:</strong> Round-robin tournaments</li>
+                    <li><strong>DAG:</strong> Task dependencies, course prerequisites</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="theory-section">
+            <h2>5. Paths and Connectivity</h2>
+
+            <div class="definition">
+                <strong>Definition 5.1:</strong> A <em>path</em> from vertex u to vertex v is a sequence of vertices (v<sub>0</sub>, v<sub>1</sub>, ..., v<sub>k</sub>) where:
+                <ul>
+                    <li>v<sub>0</sub> = u and v<sub>k</sub> = v</li>
+                    <li>Each consecutive pair is connected by an edge</li>
+                    <li>All vertices are distinct (except possibly u = v)</li>
+                </ul>
+            </div>
+
+            <div class="definition">
+                <strong>Definition 5.2:</strong> A <em>cycle</em> is a path where the first and last vertices are the same, with length ≥ 3.
+            </div>
+
+            <div class="definition">
+                <strong>Definition 5.3:</strong> A graph is <em>connected</em> if there exists a path between every pair of vertices.
+            </div>
+
+            <div class="concept-box">
+                <h3>Distance and Diameter</h3>
+                <ul>
+                    <li><strong>Distance d(u,v):</strong> Length of shortest path from u to v</li>
+                    <li><strong>Diameter:</strong> max<sub>u,v∈V</sub> d(u,v)</li>
+                    <li><strong>Radius:</strong> min<sub>v∈V</sub> max<sub>u∈V</sub> d(u,v)</li>
+                </ul>
+            </div>
+
+            <div class="theorem-box">
+                <strong>Theorem 5.1:</strong> A graph with n vertices and more than n-1 edges must contain at least one cycle.
+            </div>
+        </div>
+
+        <div class="practice-section">
+            <h2>Practice Problems</h2>
+            
+            <div class="question-card">
+                <h4>Problem 1:</h4>
+                <p>A graph has 8 vertices with degrees: 3, 3, 4, 4, 5, 5, 6, x. Find x.</p>
+                <details>
+                    <summary>Solution</summary>
+                    <p>By Handshaking Lemma: sum of degrees = 2|E| (must be even)</p>
+                    <p>Current sum: 3+3+4+4+5+5+6 = 30</p>
+                    <p>30 + x must be even, so x must be even</p>
+                    <p>Also, x ≤ 7 (max degree in simple graph with 8 vertices)</p>
+                    <p><strong>Answer: x = 2, 4, or 6</strong></p>
+                </details>
+            </div>
+
+            <div class="question-card">
+                <h4>Problem 2:</h4>
+                <p>Prove: In any group of people, there are at least two people who know the same number of others.</p>
+                <details>
+                    <summary>Solution</summary>
+                    <p>Model as graph: vertices = people, edges = acquaintances</p>
+                    <p>With n people, degrees range from 0 to n-1</p>
+                    <p>If someone knows 0 people, no one can know all n-1 others</p>
+                    <p>So only n-1 possible degree values for n people</p>
+                    <p>By Pigeonhole Principle: at least two people have same degree ∎</p>
+                </details>
+            </div>
+
+            <div class="question-card">
+                <h4>Problem 3:</h4>
+                <p>Can a simple graph have degree sequence [4, 4, 3, 3, 2]?</p>
+                <details>
+                    <summary>Solution</summary>
+                    <p>Sum of degrees: 4+4+3+3+2 = 16 (even ✓)</p>
+                    <p>Number of edges: 16/2 = 8</p>
+                    <p>5 vertices, max edges in simple graph: C(5,2) = 10 ✓</p>
+                    <p>Check degree constraint: Each vertex degree ≤ 4 (n-1) ✓</p>
+                    <p><strong>Answer: Yes, it's possible</strong></p>
+                </details>
+            </div>
+
+            <div class="question-card">
+                <h4>Problem 4:</h4>
+                <p>A connected graph has 10 vertices and 12 edges. What's the minimum number of cycles?</p>
+                <details>
+                    <summary>Solution</summary>
+                    <p>A tree with 10 vertices has exactly 9 edges (no cycles)</p>
+                    <p>Each additional edge creates at least one cycle</p>
+                    <p>12 - 9 = 3 extra edges</p>
+                    <p><strong>Answer: At least 3 cycles</strong></p>
+                </details>
+            </div>
+
+            <div class="question-card">
+                <h4>Problem 5:</h4>
+                <p>Determine if K<sub>5</sub> (complete graph on 5 vertices) is bipartite.</p>
+                <details>
+                    <summary>Solution</summary>
+                    <p>K<sub>5</sub> contains triangles (3-cycles)</p>
+                    <p>By Theorem 4.1: bipartite ⟺ no odd cycles</p>
+                    <p>Since K<sub>5</sub> has 3-cycles, it's not bipartite</p>
+                    <p><strong>Answer: No, K<sub>5</sub> is not bipartite</strong></p>
+                </details>
+            </div>
+
+            <div class="question-card">
+                <h4>Problem 6:</h4>
+                <p>Find the diameter of a complete graph K<sub>n</sub> (n ≥ 2).</p>
+                <details>
+                    <summary>Solution</summary>
+                    <p>In K<sub>n</sub>, every pair of vertices is directly connected</p>
+                    <p>Distance between any two vertices = 1</p>
+                    <p>Diameter = maximum distance = 1</p>
+                    <p><strong>Answer: diameter(K<sub>n</sub>) = 1</strong></p>
+                </details>
+            </div>
+        </div>
+
+        <div class="summary-panel">
+            <h3>Chapter Summary</h3>
+            <ol>
+                <li>Graphs model pairwise relationships: G = (V, E)</li>
+                <li>Degree is fundamental: Handshaking Lemma relates degrees to edges</li>
+                <li>Odd degree vertices always come in even numbers</li>
+                <li>Special types: complete, bipartite, trees each have unique properties</li>
+                <li>Trees are minimal connected graphs: |E| = n - 1</li>
+                <li>Connectivity and paths form basis for many algorithms</li>
+            </ol>
+        </div>
+
+        <div style="text-align: center; margin: 30px 0;">
+            <a href="concept-summary.html" class="btn btn-secondary">View Quick Summary</a>
+        </div>
+
+        <a href="../index.html" class="back-link">← Return to Modules</a>
+    </div>
+
+    <script src="../script.js"></script>
+</body>
+</html>

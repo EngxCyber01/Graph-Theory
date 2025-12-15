@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fundamentals - Quick Review</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <header class="lecture-header">
+        <h1 class="lecture-title">Module 01: Quick Review</h1>
+        <p class="lecture-subtitle">Essential Concepts at a Glance</p>
+    </header>
+
+    <div class="content-wrapper">
+        <a href="../index.html" class="back-link">← Return to Modules</a>
+
+        <div class="summary-panel">
+            <h3>Core Definitions</h3>
+            <ul>
+                <li><strong>Graph:</strong> G = (V, E) - set of vertices connected by edges</li>
+                <li><strong>Order:</strong> |V| = number of vertices</li>
+                <li><strong>Size:</strong> |E| = number of edges</li>
+                <li><strong>Degree:</strong> Number of edges incident to a vertex</li>
+            </ul>
+        </div>
+
+        <div class="theory-section">
+            <h2>Graph Types</h2>
+            <table>
+                <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                    <th>Example Use</th>
+                </tr>
+                <tr>
+                    <td><strong>Undirected</strong></td>
+                    <td>Edges have no direction</td>
+                    <td>Friendships, roads</td>
+                </tr>
+                <tr>
+                    <td><strong>Directed</strong></td>
+                    <td>Edges have specific direction</td>
+                    <td>Web links, follows</td>
+                </tr>
+                <tr>
+                    <td><strong>Weighted</strong></td>
+                    <td>Edges have numerical values</td>
+                    <td>Distances, costs</td>
+                </tr>
+                <tr>
+                    <td><strong>Complete (K<sub>n</sub>)</strong></td>
+                    <td>All vertices connected</td>
+                    <td>Tournaments</td>
+                </tr>
+                <tr>
+                    <td><strong>Tree</strong></td>
+                    <td>Connected, acyclic</td>
+                    <td>Hierarchies</td>
+                </tr>
+                <tr>
+                    <td><strong>DAG</strong></td>
+                    <td>Directed, no cycles</td>
+                    <td>Task scheduling</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="theory-section">
+            <h2>Key Formulas</h2>
+            <div class="formula">
+                Handshaking Lemma: Σ deg(v) = 2|E|
+            </div>
+            <div class="formula">
+                Complete Graph K<sub>n</sub>: |E| = n(n-1)/2
+            </div>
+            <div class="formula">
+                Tree with n vertices: |E| = n - 1
+            </div>
+        </div>
+
+        <div class="theory-section">
+            <h2>Essential Terminology</h2>
+            <ul>
+                <li><strong>Path:</strong> Sequence of vertices with no repetition</li>
+                <li><strong>Cycle:</strong> Path that starts and ends at same vertex</li>
+                <li><strong>Connected:</strong> Path exists between every pair of vertices</li>
+                <li><strong>Component:</strong> Maximal connected subgraph</li>
+                <li><strong>Distance:</strong> Length of shortest path between vertices</li>
+                <li><strong>Diameter:</strong> Maximum distance in the graph</li>
+            </ul>
+        </div>
+
+        <div class="concept-box">
+            <h3>Quick Facts</h3>
+            <ul>
+                <li>Number of vertices with odd degree is always <strong>even</strong></li>
+                <li>Trees have exactly <strong>n-1 edges</strong> for n vertices</li>
+                <li>Complete graph K<sub>5</sub> has <strong>10 edges</strong></li>
+                <li>Adding edge to tree creates exactly <strong>one cycle</strong></li>
+            </ul>
+        </div>
+
+        <div class="example-box">
+            <h4>Quick Practice</h4>
+            <ol>
+                <li>Graph with 5 vertices, max edges? <em>Answer: 10</em></li>
+                <li>Degrees [2,3,3,4], how many edges? <em>Answer: 6</em></li>
+                <li>Can odd degree count be 5? <em>No (must be even)</em></li>
+                <li>Facebook uses which type? <em>Undirected</em></li>
+                <li>Twitter uses which type? <em>Directed</em></li>
+            </ol>
+        </div>
+
+        <div class="summary-panel">
+            <h3>Key Takeaways</h3>
+            <ol>
+                <li>Graphs model relationships: vertices and edges</li>
+                <li>Choose type based on application needs</li>
+                <li>Degree is fundamental for analysis</li>
+                <li>Handshaking lemma is a powerful counting tool</li>
+                <li>Trees are special: connected and acyclic</li>
+            </ol>
+        </div>
+
+        <div style="text-align: center; margin: 30px 0;">
+            <a href="concept-full.html" class="btn btn-primary">View Complete Theory</a>
+        </div>
+
+        <a href="../index.html" class="back-link">← Return to Modules</a>
+    </div>
+
+    <script src="../script.js"></script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planar Graphs - Quick Review</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <header class="lecture-header">
+        <h1 class="lecture-title">Module 03: Quick Review</h1>
+        <p class="lecture-subtitle">Planar Graphs at a Glance</p>
+    </header>
+
+    <div class="content-wrapper">
+        <a href="../index.html" class="back-link">← Return to Modules</a>
+
+        <div class="summary-panel">
+            <h3>Key Definition</h3>
+            <p><strong>Planar Graph:</strong> Can be drawn in the plane with no edge crossings</p>
+        </div>
+
+        <div class="theory-section">
+            <h2>Euler's Formula</h2>
+            <div class="formula">
+                v - e + f = 2
+            </div>
+            <p>Where: v = vertices, e = edges, f = faces</p>
+            <p>Works for any connected planar graph!</p>
+        </div>
+
+        <div class="theory-section">
+            <h2>Key Theorems</h2>
+            <div class="theorem-box">
+                <strong>Theorem 1:</strong> If G is planar with v ≥ 3:
+                <div class="formula">e ≤ 3v - 6</div>
+            </div>
+
+            <div class="theorem-box">
+                <strong>Theorem 2:</strong> If G is planar with no triangles:
+                <div class="formula">e ≤ 2v - 4</div>
+            </div>
+
+            <div class="theorem-box">
+                <strong>Kuratowski's Theorem:</strong> G is planar ⟺ it contains no K<sub>5</sub> or K<sub>3,3</sub> subdivision
+            </div>
+        </div>
+
+        <div class="theory-section">
+            <h2>Famous Non-Planar Graphs</h2>
+            <ul>
+                <li><strong>K<sub>5</sub>:</strong> Complete graph on 5 vertices (10 edges)</li>
+                <li><strong>K<sub>3,3</sub>:</strong> Complete bipartite graph (9 edges)</li>
+            </ul>
+        </div>
+
+        <div class="example-box">
+            <h4>Quick Tests for Planarity</h4>
+            <ol>
+                <li>Check if e ≤ 3v - 6 (necessary but not sufficient)</li>
+                <li>Look for K<sub>5</sub> or K<sub>3,3</sub> subdivisions</li>
+                <li>Try to draw without crossings</li>
+            </ol>
+        </div>
+
+        <div class="concept-box">
+            <h3>Quick Examples</h3>
+            <ul>
+                <li><strong>K<sub>4</sub>:</strong> Planar (can draw as tetrahedron)</li>
+                <li><strong>K<sub>5</sub>:</strong> NOT planar (10 > 3(5)-6 = 9)</li>
+                <li><strong>Trees:</strong> Always planar</li>
+                <li><strong>Cycles:</strong> Always planar</li>
+                <li><strong>Cube graph:</strong> Planar (8 vertices, 12 edges)</li>
+            </ul>
+        </div>
+
+        <div class="formula">
+            Sum of face degrees = 2e
+        </div>
+
+        <div class="example-box">
+            <h4>Quick Problem</h4>
+            <p><strong>Q:</strong> Planar graph with 6 vertices, 10 edges. How many faces?</p>
+            <p><strong>A:</strong> v - e + f = 2 → 6 - 10 + f = 2 → f = 6 faces</p>
+        </div>
+
+        <div class="summary-panel">
+            <h3>Key Takeaways</h3>
+            <ol>
+                <li>Euler's formula: v - e + f = 2 (connected planar)</li>
+                <li>Edge bound: e ≤ 3v - 6</li>
+                <li>K<sub>5</sub> and K<sub>3,3</sub> are the fundamental non-planar graphs</li>
+                <li>Planarity has applications in circuit design, maps</li>
+            </ol>
+        </div>
+
+        <div style="text-align: center; margin: 30px 0;">
+            <a href="planar-full.html" class="btn btn-primary">View Complete Theory</a>
+        </div>
+
+        <a href="../index.html" class="back-link">← Return to Modules</a>
+    </div>
+
+    <script src="../script.js"></script>
+</body>
+</html>

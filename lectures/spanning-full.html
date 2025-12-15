@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spanning Trees - Complete Theory</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <header class="lecture-header">
+        <h1 class="lecture-title">Module 04: Complete Theory</h1>
+        <p class="lecture-subtitle">Spanning Trees and MST Algorithms</p>
+    </header>
+
+    <div class="content-wrapper">
+        <a href="../index.html" class="back-link">← Return to Modules</a>
+
+        <div class="theory-section">
+            <h2>1. Introduction to Spanning Trees</h2>
+            
+            <div class="definition">
+                <strong>Definition 1.1:</strong> A <em>spanning tree</em> of a connected graph G = (V, E) is a subgraph T = (V, E') that:
+                <ul>
+                    <li>Includes all vertices: V(T) = V(G)</li>
+                    <li>Is a tree (connected and acyclic)</li>
+                    <li>Has exactly |V| - 1 edges</li>
+                </ul>
+            </div>
+
+            <div class="theorem-box">
+                <strong>Theorem 1.1:</strong> Every connected graph has at least one spanning tree.
+                <br><br>
+                <strong>Proof:</strong> If G is a tree, it is its own spanning tree. Otherwise, G contains a cycle. Remove any edge from this cycle; the graph remains connected (alternate path exists). Repeat until no cycles remain. Result is a spanning tree. ∎
+            </div>
+
+            <div class="example-box">
+                <h4>Example 1.1:</h4>
+                <p>Complete graph K<sub>4</sub>:</p>
+                <ul>
+                    <li>Has 4 vertices, 6 edges</li>
+                    <li>Any spanning tree has 3 edges</li>
+                    <li>Must remove 3 edges to get tree</li>
+                    <li>Multiple possible spanning trees</li>
+                </ul>
+            </div>
+
+            <div class="theorem-box">
+                <strong>Theorem 1.2 (Cayley's Formula):</strong> Complete graph K<sub>n</sub> has exactly n<sup>n-2</sup> distinct spanning trees.
+                <br><br>
+                Examples:
+                <ul>
+                    <li>K<sub>2</sub>: 2<sup>0</sup> = 1 tree</li>
+                    <li>K<sub>3</sub>: 3<sup>1</sup> = 3 trees</li>
+                    <li>K<sub>4</sub>: 4<sup>2</sup> = 16 trees</li>
+                    <li>K<sub>5</sub>: 5<sup>3</sup> = 125 trees</li>
+                </ul>
+            </div>
+
+            <div class="concept-box">
+                <h3>Properties of Spanning Trees</h3>
+                <ul>
+                    <li>Adding any edge creates exactly one cycle</li>
+                    <li>Removing any edge disconnects the tree</li>
+                    <li>Unique path between any two vertices</li>
+                    <li>Minimal connected subgraph</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="theory-section">
+            <h2>2. Minimum Spanning Trees (MST)</h2>
+            
+            <div class="definition">
+                <strong>Definition 2.1:</strong> For a weighted graph G = (V, E, w) where w: E → ℝ assigns weights to edges, a <em>minimum spanning tree</em> is a spanning tree T with minimum total weight:
+                <div class="formula">w(T) = Σ<sub>e∈T</sub> w(e)</div>
+            </div>
+
+            <div class="concept-box">
+                <h3>Applications of MST</h3>
+                <ul>
+                    <li><strong>Network design:</strong> Connect cities with minimum cable/road</li>
+                    <li><strong>Cluster analysis:</strong> Group similar data points</li>
+                    <li><strong>Approximation algorithms:</strong> Traveling salesman problem</li>
+                    <li><strong>Image segmentation:</strong> Computer vision</li>
+                    <li><strong>Taxonomy:</strong> Construct evolutionary trees</li>
+                </ul>
+            </div>
+
+            <div class="example-box">
+                <h4>Example 2.1:</h4>
+                <p>Graph with weighted edges:</p>
+                <ul>
+                    <li>Vertices: {A, B, C, D}</li>
+                    <li>Edges: AB(4), AC(1), AD(3), BC(2), CD(5)</li>
+                </ul>
+                <p>Possible spanning trees:</p>
+                <ul>
+                    <li>T1 = {AC, AB, AD}: weight = 1+4+3 = 8</li>
+                    <li>T2 = {AC, BC, AD}: weight = 1+2+3 = 6 ← MST</li>
+                    <li>T3 = {AB, BC, CD}: weight = 4+2+5 = 11</li>
+                </ul>
+            </div>
+
+            <div class="theorem-box">
+                <strong>Theorem 2.1 (MST Uniqueness):</strong> If all edge weights are distinct, then the MST is unique.
+                <br><br>
+                <strong>Proof:</strong> Suppose two different MSTs T1 and T2 exist. Let e be the minimum weight edge in T1 but not in T2. Adding e to T2 creates a cycle C. This cycle must contain an edge f ∈ T2 but f ∉ T1 (else T1 = T2). Since e has minimum weight among edges not in T2, w(e) < w(f). Replace f with e in T2 to get a lighter spanning tree, contradicting that T2 is an MST. ∎
+            </div>
+        </div>
+
+        <div class="theory-section">
+            <h2>3. Greedy Approach and Properties</h2>
+            
+            <div class="concept-box">
+                <h3>Greedy MST Paradigm</h3>
+                <p>Both major MST algorithms use a greedy approach:</p>
+                <ul>
+                    <li>Build tree incrementally</li>
+                    <li>At each step, add "best" available edge</li>
+                    <li>Guarantee: greedy choice leads to optimal solution</li>
+                </ul>
+            </div>
+
+            <div class="theorem-box">
+                <strong>Theorem 3.1 (Cut Property):</strong> For any cut (S, V-S) in a graph, the minimum weight edge crossing the cut is in some MST.
+                <br><br>
+                <strong>Proof:</strong> Let e = (u,v) be min-weight edge with u∈S, v∈V-S. Suppose e is not in some MST T. Adding e to T creates a cycle. This cycle must contain another edge f crossing the cut. Since w(e) ≤ w(f), we can replace f with e to get T' with w(T') ≤ w(T). So T' is also an MST containing e. ∎
+            </div>
+
+            <div class="theorem-box">
+                <strong>Theorem 3.2 (Cycle Property):</strong> For any cycle C in a graph, the maximum weight edge in C is not in any MST (assuming distinct weights).
+                <br><br>
+                <strong>Proof:</strong> Let e be max-weight edge in cycle C. Suppose e is in some MST T. Removing e from T creates two components. The cycle C has another edge f connecting these components. Since w(f) < w(e), we can replace e with f to get a lighter spanning tree, contradicting that T is an MST. ∎
+            </div>
+
+            <div class="example-box">
+                <h4>Example 3.1: Cut Property</h4>
+                <p>Graph with S = {A, B}, V-S = {C, D, E}</p>
+                <p>Edges crossing cut:</p>
+                <ul>
+                    <li>AC: weight 5</li>
+                    <li>BC: weight 3 ← minimum</li>
+                    <li>BD: weight 7</li>
+                </ul>
+                <p>By Cut Property: edge BC is in some MST</p>
+            </div>
+        </div>
+
+        <div class="theory-section">
+            <h2>4. Kruskal's Algorithm</h2>
+            
+            <div class="concept-box">
+                <h3>Algorithm Description</h3>
+                <p><strong>Kruskal's Algorithm:</strong></p>
+                <ol>
+                    <li>Sort all edges by weight (ascending)</li>
+                    <li>Initialize empty tree T</li>
+                    <li>For each edge e in sorted order:
+                        <ul>
+                            <li>If adding e to T doesn't create cycle:</li>
+                            <li>Add e to T</li>
+                        </ul>
+                    </li>
+                    <li>Return T when it has n-1 edges</li>
+                </ol>
+            </div>
+
+            <div class="theorem-box">
+                <strong>Theorem 4.1:</strong> Kruskal's algorithm produces an MST.
+                <br><br>
+                <strong>Proof:</strong> By induction on edges added. Each edge added is minimum weight edge crossing some cut (connecting two components), so by Cut Property, it belongs to some MST. The greedy choices can be extended to form a complete MST. ∎
+            </div>
+
+            <div class="example-box">
+                <h4>Example 4.1: Kruskal's Trace</h4>
+                <p>Graph edges (sorted by weight):</p>
+                <ol>
+                    <li>AC: 1 → Add (connects A-C)</li>
+                    <li>BC: 2 → Add (connects B to A-C)</li>
+                    <li>AD: 3 → Add (connects D to A-B-C)</li>
+                    <li>AB: 4 → Skip (creates cycle A-B-C-A)</li>
+                    <li>CD: 5 → Skip (creates cycle)</li>
+                </ol>
+                <p>MST edges: {AC, BC, AD}, weight = 6</p>
+            </div>
+
+            <div class="concept-box">
+                <h3>Implementation Details</h3>
+                <ul>
+                    <li><strong>Cycle detection:</strong> Use Union-Find (Disjoint Set Union) data structure</li>
+                    <li><strong>Union-Find operations:</strong>
+                        <ul>
+                            <li>Find(v): Which component contains v?</li>
+                            <li>Union(u,v): Merge components of u and v</li>
+                        </ul>
+                    </li>
+                    <li>With path compression & union by rank: nearly O(1) per operation</li>
+                </ul>
+            </div>
+
+            <div class="concept-box">
+                <h3>Complexity Analysis</h3>
+                <ul>
+                    <li><strong>Sorting edges:</strong> O(m log m)</li>
+                    <li><strong>Processing edges:</strong> O(m α(n)) where α is inverse Ackermann</li>
+                    <li><strong>Total:</strong> O(m log m) ≈ O(m log n) since m ≤ n²</li>
+                    <li><strong>Space:</strong> O(n) for Union-Find</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="theory-section">
+            <h2>5. Prim's Algorithm</h2>
+            
+            <div class="concept-box">
+                <h3>Algorithm Description</h3>
+                <p><strong>Prim's Algorithm:</strong></p>
+                <ol>
+                    <li>Start with arbitrary vertex r</li>
+                    <li>Initialize tree T = {r}, S = {r}</li>
+                    <li>While S ≠ V:
+                        <ul>
+                            <li>Find minimum weight edge (u,v) with u∈S, v∉S</li>
+                            <li>Add v to S and edge (u,v) to T</li>
+                        </ul>
+                    </li>
+                    <li>Return T</li>
+                </ol>
+            </div>
+
+            <div class="theorem-box">
+                <strong>Theorem 5.1:</strong> Prim's algorithm produces an MST.
+                <br><br>
+                <strong>Proof:</strong> By induction on tree size. At each step, we add minimum weight edge crossing cut (S, V-S), which by Cut Property belongs to some MST. ∎
+            </div>
+
+            <div class="example-box">
+                <h4>Example 5.1: Prim's Trace</h4>
+                <p>Start from A, edges in order:</p>
+                <ol>
+                    <li>S = {A}, add min edge from A → AC: 1 → S = {A,C}</li>
+                    <li>S = {A,C}, min edge → BC: 2 → S = {A,B,C}</li>
+                    <li>S = {A,B,C}, min edge → AD: 3 → S = {A,B,C,D}</li>
+                </ol>
+                <p>MST edges: {AC, BC, AD}, weight = 6</p>
+            </div>
+
+            <div class="concept-box">
+                <h3>Implementation with Priority Queue</h3>
+                <ul>
+                    <li>Maintain priority queue of vertices not in tree</li>
+                    <li>Key of vertex v = minimum weight edge connecting v to tree</li>
+                    <li>Extract minimum key vertex, add to tree</li>
+                    <li>Update keys of neighbors</li>
+                </ul>
+            </div>
+
+            <div class="concept-box">
+                <h3>Complexity Analysis</h3>
+                <ul>
+                    <li><strong>Binary heap:</strong> O((n+m) log n)</li>
+                    <li><strong>Fibonacci heap:</strong> O(m + n log n)</li>
+                    <li><strong>Best for dense graphs:</strong> m ≈ n² → O(n² log n) vs Kruskal's O(n² log n²) = O(2n² log n)</li>
+                    <li><strong>Space:</strong> O(n) for priority queue</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="theory-section">
+            <h2>6. Comparison: Kruskal vs Prim</h2>
+            
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Kruskal</th>
+                    <th>Prim</th>
+                </tr>
+                <tr>
+                    <td><strong>Approach</strong></td>
+                    <td>Edge-centric (forest grows)</td>
+                    <td>Vertex-centric (tree grows)</td>
+                </tr>
+                <tr>
+                    <td><strong>Data Structure</strong></td>
+                    <td>Union-Find</td>
+                    <td>Priority Queue</td>
+                </tr>
+                <tr>
+                    <td><strong>Complexity</strong></td>
+                    <td>O(m log m)</td>
+                    <td>O(m log n) or O(m + n log n)</td>
+                </tr>
+                <tr>
+                    <td><strong>Best For</strong></td>
+                    <td>Sparse graphs (m ≈ n)</td>
+                    <td>Dense graphs (m ≈ n²)</td>
+                </tr>
+                <tr>
+                    <td><strong>Parallelization</strong></td>
+                    <td>Easier (edges independent)</td>
+                    <td>Harder (sequential growth)</td>
+                </tr>
+                <tr>
+                    <td><strong>Works on Disconnected?</strong></td>
+                    <td>Yes (finds forest)</td>
+                    <td>No (need to restart per component)</td>
+                </tr>
+            </table>
+
+            <div class="example-box">
+                <h4>Example 6.1: When to use which?</h4>
+                <p><strong>Scenario 1:</strong> Social network (n=10⁶, m=10⁷)</p>
+                <ul>
+                    <li>Sparse graph: m ≈ 10n</li>
+                    <li><strong>Choose Kruskal:</strong> O(10⁷ log 10⁷) ≈ 70M operations</li>
+                </ul>
+                <p><strong>Scenario 2:</strong> Complete city graph (n=1000, m≈500K)</p>
+                <ul>
+                    <li>Dense graph: m ≈ n²/2</li>
+                    <li><strong>Choose Prim:</strong> O(10⁶ log 1000) ≈ 10M operations</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="theory-section">
+            <h2>7. Advanced Topics</h2>
+            
+            <div class="concept-box">
+                <h3>MST Verification</h3>
+                <p>Given a spanning tree T, verify if it's an MST:</p>
+                <ul>
+                    <li>For each edge e∉T, check cycle formed by adding e</li>
+                    <li>T is MST ⟺ e is max weight edge in its cycle</li>
+                    <li>Can be done in O(m) time</li>
+                </ul>
+            </div>
+
+            <div class="concept-box">
+                <h3>Bottleneck Spanning Tree</h3>
+                <ul>
+                    <li>Minimize maximum edge weight in spanning tree</li>
+                    <li><strong>Theorem:</strong> Every MST is also a bottleneck spanning tree</li>
+                    <li>But not every bottleneck ST is an MST</li>
+                </ul>
+            </div>
+
+            <div class="concept-box">
+                <h3>Dynamic MST</h3>
+                <ul>
+                    <li>Maintain MST as graph changes (edge insertions/deletions)</li>
+                    <li>More complex data structures needed</li>
+                    <li>Applications: network routing protocols</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="practice-section">
+            <h2>Practice Problems</h2>
+            
+            <div class="question-card">
+                <h4>Problem 1:</h4>
+                <p>How many spanning trees does K<sub>5</sub> have?</p>
+                <details>
+                    <summary>Solution</summary>
+                    <p>By Cayley's Formula: n<sup>n-2</sup></p>
+                    <p>For K<sub>5</sub>: 5<sup>5-2</sup> = 5³ = 125</p>
+                    <p><strong>Answer: 125 spanning trees</strong></p>
+                </details>
+            </div>
+
+            <div class="question-card">
+                <h4>Problem 2:</h4>
+                <p>Run Kruskal's algorithm on graph with edges: AB(5), AC(3), AD(7), BC(4), BD(2), CD(6). Find MST weight.</p>
+                <details>
+                    <summary>Solution</summary>
+                    <p>Sort edges: BD(2), AC(3), BC(4), AB(5), CD(6), AD(7)</p>
+                    <ol>
+                        <li>Add BD(2): {B-D}</li>
+                        <li>Add AC(3): {B-D}, {A-C}</li>
+                        <li>Add BC(4): {A-B-C-D}</li>
+                        <li>Skip AB(5): creates cycle</li>
+                        <li>Done (3 edges for 4 vertices)</li>
+                    </ol>
+                    <p>MST: {BD, AC, BC}, weight = 2+3+4 = 9</p>
+                </details>
+            </div>
+
+            <div class="question-card">
+                <h4>Problem 3:</h4>
+                <p>Prove that removing the maximum weight edge from a cycle never affects the MST.</p>
+                <details>
+                    <summary>Solution</summary>
+                    <p>By Cycle Property: maximum weight edge in any cycle is not in any MST</p>
+                    <p>Therefore, removing it doesn't affect the MST</p>
+                    <p>The MST uses other edges to connect those vertices ∎</p>
+                </details>
+            </div>
+
+            <div class="question-card">
+                <h4>Problem 4:</h4>
+                <p>If all edges have the same weight, what can you say about the MST?</p>
+                <details>
+                    <summary>Solution</summary>
+                    <p>Any spanning tree is an MST (all have same total weight)</p>
+                    <p>Number of different MSTs = number of spanning trees</p>
+                    <p>For K<sub>n</sub>: n<sup>n-2</sup> different MSTs</p>
+                    <p><strong>MST is highly non-unique!</strong></p>
+                </details>
+            </div>
+
+            <div class="question-card">
+                <h4>Problem 5:</h4>
+                <p>Compare time complexity of Kruskal and Prim for complete graph K<sub>n</sub>.</p>
+                <details>
+                    <summary>Solution</summary>
+                    <p>K<sub>n</sub> has m = n(n-1)/2 ≈ n²/2 edges</p>
+                    <p><strong>Kruskal:</strong></p>
+                    <ul>
+                        <li>O(m log m) = O(n² log n²) = O(2n² log n)</li>
+                    </ul>
+                    <p><strong>Prim (binary heap):</strong></p>
+                    <ul>
+                        <li>O((n+m) log n) = O(n² log n)</li>
+                    </ul>
+                    <p><strong>Prim is roughly 2× faster for complete graphs</strong></p>
+                </details>
+            </div>
+
+            <div class="question-card">
+                <h4>Problem 6:</h4>
+                <p>Show that in any weighted graph, the MST includes the minimum weight edge.</p>
+                <details>
+                    <summary>Solution</summary>
+                    <p>Let e be the minimum weight edge</p>
+                    <p>Consider cut separating e's endpoints: S = {u}, V-S = {all others}</p>
+                    <p>Edge e is minimum weight edge crossing this cut</p>
+                    <p>By Cut Property: e is in some MST</p>
+                    <p>If all edges have distinct weights: e is in THE unique MST ∎</p>
+                </details>
+            </div>
+
+            <div class="question-card">
+                <h4>Problem 7:</h4>
+                <p>A graph has MST with total weight 100. If we increase every edge weight by 5, what's the new MST weight?</p>
+                <details>
+                    <summary>Solution</summary>
+                    <p>Spanning tree has n-1 edges</p>
+                    <p>Each edge weight increases by 5</p>
+                    <p>Total increase: 5(n-1)</p>
+                    <p>But we need n to calculate exact value</p>
+                    <p><strong>General answer: 100 + 5(n-1)</strong></p>
+                    <p>Note: The same tree remains MST (relative ordering unchanged)</p>
+                </details>
+            </div>
+
+            <div class="question-card">
+                <h4>Problem 8:</h4>
+                <p>Design an algorithm to find the second-best MST (MST with second minimum total weight).</p>
+                <details>
+                    <summary>Solution</summary>
+                    <p><strong>Algorithm:</strong></p>
+                    <ol>
+                        <li>Find the MST T using Kruskal or Prim</li>
+                        <li>For each edge e in T:
+                            <ul>
+                                <li>Remove e from T (creates two components)</li>
+                                <li>Find minimum weight edge f∉T reconnecting components</li>
+                                <li>Weight of T' = w(T) - w(e) + w(f)</li>
+                            </ul>
+                        </li>
+                        <li>Return T' with minimum weight among all candidates</li>
+                    </ol>
+                    <p><strong>Complexity:</strong> O(n²) after computing MST</p>
+                </details>
+            </div>
+        </div>
+
+        <div class="summary-panel">
+            <h3>Chapter Summary</h3>
+            <ol>
+                <li>Spanning trees connect all vertices with minimum edges (n-1)</li>
+                <li>MST minimizes total edge weight in spanning tree</li>
+                <li>Greedy approach works: both Kruskal and Prim are optimal</li>
+                <li>Cut Property: min edge crossing cut is in some MST</li>
+                <li>Cycle Property: max edge in cycle is not in any MST</li>
+                <li>Kruskal: O(m log m), best for sparse graphs, uses Union-Find</li>
+                <li>Prim: O(m log n), best for dense graphs, uses priority queue</li>
+                <li>Applications: network design, clustering, approximation algorithms</li>
+            </ol>
+        </div>
+
+        <div style="text-align: center; margin: 30px 0;">
+            <a href="spanning-summary.html" class="btn btn-secondary">View Quick Summary</a>
+        </div>
+
+        <a href="../index.html" class="back-link">← Return to Modules</a>
+    </div>
+
+    <script src="../script.js"></script>
+</body>
+</html>

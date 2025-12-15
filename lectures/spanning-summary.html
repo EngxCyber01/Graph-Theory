@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spanning Trees - Quick Review</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <header class="lecture-header">
+        <h1 class="lecture-title">Module 04: Quick Review</h1>
+        <p class="lecture-subtitle">Spanning Trees at a Glance</p>
+    </header>
+
+    <div class="content-wrapper">
+        <a href="../index.html" class="back-link">← Return to Modules</a>
+
+        <div class="summary-panel">
+            <h3>Core Definition</h3>
+            <p><strong>Spanning Tree:</strong> A subgraph that:</p>
+            <ul>
+                <li>Is a tree (connected, acyclic)</li>
+                <li>Includes all vertices</li>
+                <li>Has exactly n-1 edges for n vertices</li>
+            </ul>
+        </div>
+
+        <div class="theory-section">
+            <h2>Minimum Spanning Tree (MST)</h2>
+            <div class="concept-box">
+                <p><strong>MST:</strong> Spanning tree with minimum total edge weight</p>
+                <p><strong>Applications:</strong> Network design, clustering, approximation algorithms</p>
+            </div>
+        </div>
+
+        <div class="theory-section">
+            <h2>Two Classic Algorithms</h2>
+            
+            <div class="concept-box">
+                <h3>Kruskal's Algorithm</h3>
+                <ol>
+                    <li>Sort edges by weight</li>
+                    <li>Add cheapest edge that doesn't create cycle</li>
+                    <li>Repeat until n-1 edges</li>
+                </ol>
+                <p><strong>Time:</strong> O(m log m)</p>
+                <p><strong>Best for:</strong> Sparse graphs</p>
+            </div>
+
+            <div class="concept-box">
+                <h3>Prim's Algorithm</h3>
+                <ol>
+                    <li>Start from any vertex</li>
+                    <li>Add cheapest edge to tree</li>
+                    <li>Repeat until all vertices included</li>
+                </ol>
+                <p><strong>Time:</strong> O(m log n) with heap</p>
+                <p><strong>Best for:</strong> Dense graphs</p>
+            </div>
+        </div>
+
+        <div class="theory-section">
+            <h2>Key Properties</h2>
+            <div class="theorem-box">
+                <strong>Cut Property:</strong> Minimum weight edge crossing a cut is in some MST
+            </div>
+            <div class="theorem-box">
+                <strong>Cycle Property:</strong> Maximum weight edge in a cycle is not in any MST
+            </div>
+            <div class="theorem-box">
+                <strong>Uniqueness:</strong> If all edge weights distinct, MST is unique
+            </div>
+        </div>
+
+        <div class="example-box">
+            <h4>Quick Example</h4>
+            <p>Graph with edges and weights:</p>
+            <ul>
+                <li>AB: 4, AC: 3, BC: 2, BD: 5, CD: 1</li>
+            </ul>
+            <p><strong>Kruskal's order:</strong> CD(1) → BC(2) → AC(3) → Stop (4 vertices, 3 edges)</p>
+            <p><strong>MST weight:</strong> 1 + 2 + 3 = 6</p>
+        </div>
+
+        <div class="concept-box">
+            <h3>Quick Facts</h3>
+            <ul>
+                <li>Every connected graph has a spanning tree</li>
+                <li>Number of spanning trees grows exponentially</li>
+                <li>Complete graph K<sub>n</sub> has n<sup>n-2</sup> spanning trees (Cayley's formula)</li>
+                <li>Both Kruskal and Prim are greedy algorithms</li>
+                <li>MST may not be unique if edge weights repeat</li>
+            </ul>
+        </div>
+
+        <div class="formula">
+            MST weight ≤ any other spanning tree weight
+        </div>
+
+        <div class="summary-panel">
+            <h3>Key Takeaways</h3>
+            <ol>
+                <li>Spanning trees connect all vertices with minimum edges</li>
+                <li>MST minimizes total edge weight</li>
+                <li>Kruskal: sort edges, avoid cycles</li>
+                <li>Prim: grow tree from single vertex</li>
+                <li>Both algorithms guaranteed to find optimal MST</li>
+            </ol>
+        </div>
+
+        <div style="text-align: center; margin: 30px 0;">
+            <a href="spanning-full.html" class="btn btn-primary">View Complete Theory</a>
+        </div>
+
+        <a href="../index.html" class="back-link">← Return to Modules</a>
+    </div>
+
+    <script src="../script.js"></script>
+</body>
+</html>

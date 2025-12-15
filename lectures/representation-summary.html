@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Representations - Quick Review</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <header class="lecture-header">
+        <h1 class="lecture-title">Module 02: Quick Review</h1>
+        <p class="lecture-subtitle">Graph Representations at a Glance</p>
+    </header>
+
+    <div class="content-wrapper">
+        <a href="../index.html" class="back-link">← Return to Modules</a>
+
+        <div class="summary-panel">
+            <h3>Three Main Representations</h3>
+            <table>
+                <tr>
+                    <th>Method</th>
+                    <th>Space</th>
+                    <th>Edge Check</th>
+                    <th>Best For</th>
+                </tr>
+                <tr>
+                    <td><strong>Adjacency Matrix</strong></td>
+                    <td>O(n²)</td>
+                    <td>O(1)</td>
+                    <td>Dense graphs</td>
+                </tr>
+                <tr>
+                    <td><strong>Adjacency List</strong></td>
+                    <td>O(n+m)</td>
+                    <td>O(deg(v))</td>
+                    <td>Sparse graphs</td>
+                </tr>
+                <tr>
+                    <td><strong>Edge List</strong></td>
+                    <td>O(m)</td>
+                    <td>O(m)</td>
+                    <td>Simple storage</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="theory-section">
+            <h2>Adjacency Matrix</h2>
+            <div class="concept-box">
+                <p>n × n matrix A where A[i][j] = 1 if edge (i,j) exists, 0 otherwise</p>
+                <ul>
+                    <li><strong>Pros:</strong> Fast edge lookup O(1), simple operations</li>
+                    <li><strong>Cons:</strong> O(n²) space even for sparse graphs</li>
+                    <li><strong>Properties:</strong> Symmetric for undirected graphs</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="theory-section">
+            <h2>Adjacency List</h2>
+            <div class="concept-box">
+                <p>Array of lists: each vertex stores list of neighbors</p>
+                <ul>
+                    <li><strong>Pros:</strong> Space-efficient O(n+m), fast iteration</li>
+                    <li><strong>Cons:</strong> Slower edge check O(deg(v))</li>
+                    <li><strong>Best for:</strong> Most real-world graphs (sparse)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="theory-section">
+            <h2>Quick Comparison</h2>
+            <div class="formula">
+                Dense Graph: m ≈ n² → Use Matrix
+            </div>
+            <div class="formula">
+                Sparse Graph: m ≪ n² → Use List
+            </div>
+        </div>
+
+        <div class="example-box">
+            <h4>Quick Decision Guide</h4>
+            <ul>
+                <li><strong>Need fast edge checks?</strong> → Adjacency Matrix</li>
+                <li><strong>Save memory?</strong> → Adjacency List</li>
+                <li><strong>Iterate neighbors often?</strong> → Adjacency List</li>
+                <li><strong>Graph is dense?</strong> → Matrix</li>
+                <li><strong>Graph is sparse?</strong> → List</li>
+            </ul>
+        </div>
+
+        <div class="theorem-box">
+            <strong>Key Insight:</strong> Social networks, web graphs, and most real-world graphs are <em>sparse</em> (m = O(n)), making adjacency lists the practical choice.
+        </div>
+
+        <div class="summary-panel">
+            <h3>Quick Facts</h3>
+            <ol>
+                <li>Matrix: diagonal elements represent self-loops</li>
+                <li>Matrix power A<sup>k</sup>: counts k-length paths</li>
+                <li>List: sum of all list lengths = 2m (undirected)</li>
+                <li>Weighted graphs: store weights instead of 1/0</li>
+                <li>Directed graphs: lists store outgoing edges</li>
+            </ol>
+        </div>
+
+        <div style="text-align: center; margin: 30px 0;">
+            <a href="representation-full.html" class="btn btn-primary">View Complete Theory</a>
+        </div>
+
+        <a href="../index.html" class="back-link">← Return to Modules</a>
+    </div>
+
+    <script src="../script.js"></script>
+</body>
+</html>

@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planar Graphs - Complete Theory</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <header class="lecture-header">
+        <h1 class="lecture-title">Module 03: Complete Theory</h1>
+        <p class="lecture-subtitle">Planar Graphs and Euler's Formula</p>
+    </header>
+
+    <div class="content-wrapper">
+        <a href="../index.html" class="back-link">← Return to Modules</a>
+
+        <div class="theory-section">
+            <h2>1. Introduction to Planar Graphs</h2>
+            
+            <div class="definition">
+                <strong>Definition 1.1:</strong> A graph G is <em>planar</em> if it can be drawn in the plane such that no two edges cross except at their endpoints.
+            </div>
+
+            <div class="definition">
+                <strong>Definition 1.2:</strong> A <em>planar embedding</em> (or plane graph) is a specific drawing of a planar graph in the plane with no crossings.
+            </div>
+
+            <div class="concept-box">
+                <h3>Key Observations</h3>
+                <ul>
+                    <li>A graph may have multiple different planar embeddings</li>
+                    <li>Planarity is a property of the graph, not a specific drawing</li>
+                    <li>Edges can be curves, not just straight lines</li>
+                    <li>The embedding divides the plane into regions called <em>faces</em></li>
+                </ul>
+            </div>
+
+            <div class="example-box">
+                <h4>Example 1.1:</h4>
+                <p>K<sub>4</sub> (complete graph on 4 vertices) is planar:</p>
+                <ul>
+                    <li>Can be drawn as a triangle with one vertex inside</li>
+                    <li>Can also be drawn as a tetrahedron projection</li>
+                    <li>Has 4 vertices, 6 edges</li>
+                    <li>Different embeddings create different face structures</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="theory-section">
+            <h2>2. Euler's Formula</h2>
+            
+            <div class="theorem-box">
+                <strong>Theorem 2.1 (Euler's Formula):</strong> For a connected planar graph with v vertices, e edges, and f faces:
+                <div class="formula">v - e + f = 2</div>
+                <br>
+                <strong>Proof:</strong> By induction on the number of edges.
+                <br><br>
+                <strong>Base case:</strong> Tree with v vertices has e = v-1 edges and f = 1 face (the outer region).
+                <br>v - e + f = v - (v-1) + 1 = 2 ✓
+                <br><br>
+                <strong>Inductive step:</strong> For graph with cycle, remove edge e from cycle:
+                <ul>
+                    <li>Vertices unchanged: v' = v</li>
+                    <li>Edges decrease: e' = e - 1</li>
+                    <li>Faces decrease: f' = f - 1 (two faces merge)</li>
+                    <li>By induction: v' - e' + f' = 2</li>
+                    <li>So: v - (e-1) + (f-1) = 2 → v - e + f = 2 ∎</li>
+                </ul>
+            </div>
+
+            <div class="example-box">
+                <h4>Example 2.1:</h4>
+                <p>Cube graph:</p>
+                <ul>
+                    <li>v = 8 vertices</li>
+                    <li>e = 12 edges</li>
+                    <li>f = ? faces</li>
+                    <li>By Euler: 8 - 12 + f = 2 → f = 6 faces ✓</li>
+                    <li>(Matches 6 faces of a cube!)</li>
+                </ul>
+            </div>
+
+            <div class="example-box">
+                <h4>Example 2.2:</h4>
+                <p>Planar embedding of K<sub>4</sub>:</p>
+                <ul>
+                    <li>v = 4, e = 6</li>
+                    <li>f = 2 - v + e = 2 - 4 + 6 = 4 faces</li>
+                    <li>Includes the outer unbounded face</li>
+                </ul>
+            </div>
+
+            <div class="definition">
+                <strong>Definition 2.1:</strong> The <em>degree of a face</em> is the number of edges bordering it (counting each edge once or twice if it borders the face on both sides).
+            </div>
+
+            <div class="theorem-box">
+                <strong>Theorem 2.2:</strong> For a connected planar graph: Σ deg(f<sub>i</sub>) = 2e
+                <br><br>
+                <strong>Proof:</strong> Each edge is counted exactly twice in the sum of face degrees (once for each side), similar to the Handshaking Lemma. ∎
+            </div>
+        </div>
+
+        <div class="theory-section">
+            <h2>3. Bounds on Planar Graphs</h2>
+            
+            <div class="theorem-box">
+                <strong>Theorem 3.1:</strong> For a connected planar graph with v ≥ 3 vertices and e edges:
+                <div class="formula">e ≤ 3v - 6</div>
+                <br>
+                <strong>Proof:</strong>
+                <ul>
+                    <li>Each face has degree ≥ 3 (minimum: triangle)</li>
+                    <li>So: Σ deg(f<sub>i</sub>) ≥ 3f</li>
+                    <li>By Theorem 2.2: 2e ≥ 3f</li>
+                    <li>By Euler: f = 2 - v + e</li>
+                    <li>Substituting: 2e ≥ 3(2 - v + e)</li>
+                    <li>2e ≥ 6 - 3v + 3e</li>
+                    <li>-e ≥ 6 - 3v</li>
+                    <li>e ≤ 3v - 6 ∎</li>
+                </ul>
+            </div>
+
+            <div class="example-box">
+                <h4>Example 3.1: Using the bound to prove non-planarity</h4>
+                <p>Is K<sub>5</sub> planar?</p>
+                <ul>
+                    <li>K<sub>5</sub> has v = 5, e = 10</li>
+                    <li>If planar: e ≤ 3v - 6 = 3(5) - 6 = 9</li>
+                    <li>But 10 > 9, contradiction!</li>
+                    <li><strong>K<sub>5</sub> is NOT planar</strong></li>
+                </ul>
+            </div>
+
+            <div class="theorem-box">
+                <strong>Theorem 3.2:</strong> For a connected planar graph with v ≥ 3 vertices, e edges, and no triangles:
+                <div class="formula">e ≤ 2v - 4</div>
+                <br>
+                <strong>Proof:</strong> Similar to Theorem 3.1, but each face has degree ≥ 4. ∎
+            </div>
+
+            <div class="example-box">
+                <h4>Example 3.2:</h4>
+                <p>Is K<sub>3,3</sub> planar?</p>
+                <ul>
+                    <li>K<sub>3,3</sub>: v = 6, e = 9</li>
+                    <li>K<sub>3,3</sub> is bipartite → no odd cycles → no triangles</li>
+                    <li>If planar with no triangles: e ≤ 2v - 4 = 2(6) - 4 = 8</li>
+                    <li>But 9 > 8, contradiction!</li>
+                    <li><strong>K<sub>3,3</sub> is NOT planar</strong></li>
+                </ul>
+            </div>
+
+            <div class="theorem-box">
+                <strong>Corollary 3.1:</strong> Every planar graph has a vertex with degree ≤ 5.
+                <br><br>
+                <strong>Proof:</strong> 
+                <ul>
+                    <li>If all vertices had degree ≥ 6: Σ deg(v) ≥ 6v</li>
+                    <li>By Handshaking: 2e = Σ deg(v) ≥ 6v</li>
+                    <li>So: e ≥ 3v</li>
+                    <li>But for planar: e ≤ 3v - 6 < 3v, contradiction!</li>
+                    <li>Therefore, some vertex has degree ≤ 5 ∎</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="theory-section">
+            <h2>4. Kuratowski's Theorem</h2>
+            
+            <div class="definition">
+                <strong>Definition 4.1:</strong> A <em>subdivision</em> of a graph is obtained by replacing edges with paths (inserting vertices of degree 2).
+            </div>
+
+            <div class="theorem-box">
+                <strong>Theorem 4.1 (Kuratowski, 1930):</strong> A graph is planar if and only if it contains no subgraph that is a subdivision of K<sub>5</sub> or K<sub>3,3</sub>.
+            </div>
+
+            <div class="concept-box">
+                <h3>Interpretation</h3>
+                <ul>
+                    <li>K<sub>5</sub> and K<sub>3,3</sub> are the "fundamental" non-planar graphs</li>
+                    <li>Any non-planar graph contains one of these (possibly with extra vertices)</li>
+                    <li>This gives a characterization of planarity</li>
+                    <li>Can be used as basis for planarity testing algorithms</li>
+                </ul>
+            </div>
+
+            <div class="example-box">
+                <h4>Example 4.1:</h4>
+                <p>Petersen graph is non-planar because it contains K<sub>3,3</sub> subdivision:</p>
+                <ul>
+                    <li>Has 10 vertices, 15 edges</li>
+                    <li>Check: 15 ≤ 3(10) - 6 = 24 ✓ (bound doesn't prove non-planarity)</li>
+                    <li>But contains K<sub>3,3</sub> subdivision</li>
+                    <li>By Kuratowski: NOT planar</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="theory-section">
+            <h2>5. Applications of Planar Graphs</h2>
+            
+            <div class="concept-box">
+                <h3>Circuit Board Design</h3>
+                <ul>
+                    <li>Electronic components as vertices</li>
+                    <li>Connections as edges</li>
+                    <li>Planar layout avoids wire crossings (reduces costs)</li>
+                    <li>Multi-layer boards allow non-planar circuits</li>
+                </ul>
+            </div>
+
+            <div class="concept-box">
+                <h3>Geographic Maps</h3>
+                <ul>
+                    <li>Countries/regions as vertices</li>
+                    <li>Adjacency as edges</li>
+                    <li>Map graphs are always planar</li>
+                    <li>Leads to Four Color Theorem</li>
+                </ul>
+            </div>
+
+            <div class="theorem-box">
+                <strong>Four Color Theorem:</strong> Every planar graph can be vertex-colored with at most 4 colors such that adjacent vertices have different colors.
+                <br><br>
+                (Proved by Appel and Haken, 1976, using computer assistance)
+            </div>
+        </div>
+
+        <div class="theory-section">
+            <h2>6. Duality in Planar Graphs</h2>
+            
+            <div class="definition">
+                <strong>Definition 6.1:</strong> The <em>dual graph</em> G* of a planar graph G is constructed by:
+                <ul>
+                    <li>Placing a vertex in each face of G</li>
+                    <li>For each edge e in G, connecting the vertices in the faces on either side of e</li>
+                </ul>
+            </div>
+
+            <div class="concept-box">
+                <h3>Properties of Dual Graphs</h3>
+                <ul>
+                    <li>v* = f (vertices in dual = faces in primal)</li>
+                    <li>f* = v (faces in dual = vertices in primal)</li>
+                    <li>e* = e (same number of edges)</li>
+                    <li>(G*)* = G (dual of dual is original)</li>
+                </ul>
+            </div>
+
+            <div class="example-box">
+                <h4>Example 6.1:</h4>
+                <p>Cube graph (v=8, e=12, f=6) has dual:</p>
+                <ul>
+                    <li>Octahedron (v*=6, e*=12, f*=8)</li>
+                    <li>Vertices and faces are swapped</li>
+                    <li>Both satisfy Euler's formula</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="practice-section">
+            <h2>Practice Problems</h2>
+            
+            <div class="question-card">
+                <h4>Problem 1:</h4>
+                <p>A connected planar graph has 12 vertices and 20 edges. How many faces does it have?</p>
+                <details>
+                    <summary>Solution</summary>
+                    <p>Using Euler's formula: v - e + f = 2</p>
+                    <p>12 - 20 + f = 2</p>
+                    <p>f = 10</p>
+                    <p><strong>Answer: 10 faces</strong></p>
+                </details>
+            </div>
+
+            <div class="question-card">
+                <h4>Problem 2:</h4>
+                <p>Show that K<sub>6</sub> (complete graph on 6 vertices) is not planar.</p>
+                <details>
+                    <summary>Solution</summary>
+                    <p>K<sub>6</sub> has v = 6, e = C(6,2) = 15</p>
+                    <p>For planar graph: e ≤ 3v - 6 = 3(6) - 6 = 12</p>
+                    <p>Since 15 > 12, K<sub>6</sub> violates the bound</p>
+                    <p><strong>K<sub>6</sub> is NOT planar</strong></p>
+                </details>
+            </div>
+
+            <div class="question-card">
+                <h4>Problem 3:</h4>
+                <p>In a planar embedding, the sum of face degrees is 30. How many edges does the graph have?</p>
+                <details>
+                    <summary>Solution</summary>
+                    <p>By Theorem 2.2: Σ deg(f<sub>i</sub>) = 2e</p>
+                    <p>30 = 2e</p>
+                    <p>e = 15</p>
+                    <p><strong>Answer: 15 edges</strong></p>
+                </details>
+            </div>
+
+            <div class="question-card">
+                <h4>Problem 4:</h4>
+                <p>Prove that every planar graph with at least 5 vertices has at least two vertices of degree ≤ 5.</p>
+                <details>
+                    <summary>Solution</summary>
+                    <p>By Corollary 3.1: at least one vertex v has deg(v) ≤ 5</p>
+                    <p>Remove v from graph, get graph G'</p>
+                    <p>G' is still planar with v' ≥ 4 vertices</p>
+                    <p>If v' ≥ 3: apply Corollary 3.1 again</p>
+                    <p>G' has vertex u with deg(u) ≤ 5</p>
+                    <p>Both v and u in original graph have degree ≤ 5 ∎</p>
+                </details>
+            </div>
+
+            <div class="question-card">
+                <h4>Problem 5:</h4>
+                <p>A tree with 10 vertices is drawn in the plane. How many faces does it have?</p>
+                <details>
+                    <summary>Solution</summary>
+                    <p>Tree with v = 10 has e = 9 edges</p>
+                    <p>Euler's formula: v - e + f = 2</p>
+                    <p>10 - 9 + f = 2</p>
+                    <p>f = 1</p>
+                    <p><strong>Answer: 1 face (only the outer face)</strong></p>
+                    <p>Trees have no enclosed regions!</p>
+                </details>
+            </div>
+
+            <div class="question-card">
+                <h4>Problem 6:</h4>
+                <p>Can a planar graph have 8 vertices where each vertex has degree 6?</p>
+                <details>
+                    <summary>Solution</summary>
+                    <p>If all 8 vertices have degree 6:</p>
+                    <p>Σ deg(v) = 8 × 6 = 48</p>
+                    <p>By Handshaking: 2e = 48 → e = 24</p>
+                    <p>For planar: e ≤ 3v - 6 = 3(8) - 6 = 18</p>
+                    <p>But 24 > 18, contradiction!</p>
+                    <p><strong>Answer: No, impossible</strong></p>
+                </details>
+            </div>
+
+            <div class="question-card">
+                <h4>Problem 7:</h4>
+                <p>Find the number of edges in the dual graph of a cube.</p>
+                <details>
+                    <summary>Solution</summary>
+                    <p>Cube: v = 8, e = 12, f = 6</p>
+                    <p>Dual graph property: e* = e</p>
+                    <p><strong>Answer: 12 edges</strong></p>
+                    <p>(The dual is an octahedron)</p>
+                </details>
+            </div>
+
+            <div class="question-card">
+                <h4>Problem 8:</h4>
+                <p>Prove that in a planar graph, if all faces have degree ≥ 4, then e ≤ 2f - 4.</p>
+                <details>
+                    <summary>Solution</summary>
+                    <p>Given: each face degree ≥ 4</p>
+                    <p>Σ deg(f<sub>i</sub>) ≥ 4f</p>
+                    <p>By Theorem 2.2: 2e ≥ 4f</p>
+                    <p>So: e ≥ 2f</p>
+                    <p>From Euler: f = 2 - v + e</p>
+                    <p>Substitute into e ≥ 2f:</p>
+                    <p>e ≥ 2(2 - v + e)</p>
+                    <p>e ≥ 4 - 2v + 2e</p>
+                    <p>-e ≥ 4 - 2v</p>
+                    <p>e ≤ 2v - 4 ∎</p>
+                </details>
+            </div>
+        </div>
+
+        <div class="summary-panel">
+            <h3>Chapter Summary</h3>
+            <ol>
+                <li>Planar graphs can be drawn without edge crossings</li>
+                <li>Euler's formula: v - e + f = 2 (connected planar)</li>
+                <li>Edge bound: e ≤ 3v - 6 for v ≥ 3</li>
+                <li>K<sub>5</sub> and K<sub>3,3</sub> are non-planar</li>
+                <li>Kuratowski's Theorem characterizes planarity</li>
+                <li>Every planar graph has vertex with degree ≤ 5</li>
+                <li>Applications: circuit design, maps, Four Color Theorem</li>
+            </ol>
+        </div>
+
+        <div style="text-align: center; margin: 30px 0;">
+            <a href="planar-summary.html" class="btn btn-secondary">View Quick Summary</a>
+        </div>
+
+        <a href="../index.html" class="back-link">← Return to Modules</a>
+    </div>
+
+    <script src="../script.js"></script>
+</body>
+</html>
