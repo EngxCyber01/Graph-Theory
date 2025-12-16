@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shortest Path Algorithms - Quick Review</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <header class="lecture-header">
+        <h1 class="lecture-title">Module 07: Quick Review</h1>
+        <p class="lecture-subtitle">Essential Concepts at a Glance</p>
+    </header>
+
+    <div class="content-wrapper">
+        <a href="../index.html" class="back-link">← Return to Modules</a>
+
+        <div class="summary-panel">
+            <h3>Core Definitions</h3>
+            <ul>
+                <li><strong>Shortest Path:</strong> Path with minimum total edge weight</li>
+                <li><strong>Path Weight:</strong> Sum of all edge weights in the path</li>
+                <li><strong>Distance δ(u,v):</strong> Weight of shortest path from u to v</li>
+                <li><strong>Relaxation:</strong> Updating distance if shorter path found</li>
+            </ul>
+        </div>
+
+        <div class="theory-section">
+            <h2>Three Main Algorithms</h2>
+            <table>
+                <tr>
+                    <th>Algorithm</th>
+                    <th>Time</th>
+                    <th>Space</th>
+                    <th>Negative?</th>
+                    <th>Type</th>
+                </tr>
+                <tr>
+                    <td><strong>Dijkstra</strong></td>
+                    <td>O((V+E)log V)</td>
+                    <td>O(V)</td>
+                    <td>No</td>
+                    <td>Single-source</td>
+                </tr>
+                <tr>
+                    <td><strong>Bellman-Ford</strong></td>
+                    <td>O(VE)</td>
+                    <td>O(V)</td>
+                    <td>Yes</td>
+                    <td>Single-source</td>
+                </tr>
+                <tr>
+                    <td><strong>Floyd-Warshall</strong></td>
+                    <td>O(V³)</td>
+                    <td>O(V²)</td>
+                    <td>Yes</td>
+                    <td>All-pairs</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="theory-section">
+            <h2>Dijkstra's Algorithm</h2>
+            <div class="concept-box">
+                <h3>Quick Steps</h3>
+                <ol>
+                    <li>Set source distance = 0, all others = ∞</li>
+                    <li>Pick unvisited vertex with minimum distance</li>
+                    <li>Update distances to its neighbors</li>
+                    <li>Mark as visited, repeat until all visited</li>
+                </ol>
+            </div>
+            <div class="summary-panel">
+                <p><strong>Key Insight:</strong> Greedy - always picks closest unvisited vertex</p>
+                <p><strong>Limitation:</strong> Fails with negative edges</p>
+                <p><strong>Best for:</strong> GPS, routing, networks with positive weights</p>
+            </div>
+        </div>
+
+        <div class="theory-section">
+            <h2>Bellman-Ford Algorithm</h2>
+            <div class="concept-box">
+                <h3>Quick Steps</h3>
+                <ol>
+                    <li>Set source distance = 0, all others = ∞</li>
+                    <li>Repeat V-1 times: relax all edges</li>
+                    <li>Check once more: if any edge relaxes, negative cycle exists</li>
+                </ol>
+            </div>
+            <div class="summary-panel">
+                <p><strong>Key Insight:</strong> Dynamic programming - builds up paths</p>
+                <p><strong>Advantage:</strong> Handles negative weights, detects negative cycles</p>
+                <p><strong>Best for:</strong> Currency arbitrage, graphs with negative edges</p>
+            </div>
+        </div>
+
+        <div class="theory-section">
+            <h2>Floyd-Warshall Algorithm</h2>
+            <div class="concept-box">
+                <h3>Quick Steps</h3>
+                <ol>
+                    <li>Initialize: dist[i][j] = edge weight or ∞</li>
+                    <li>For each intermediate vertex k:
+                        <ul>
+                            <li>For each pair (i,j):</li>
+                            <li>dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j])</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+            <div class="summary-panel">
+                <p><strong>Key Insight:</strong> Try all vertices as intermediate points</p>
+                <p><strong>Advantage:</strong> Computes all-pairs at once</p>
+                <p><strong>Best for:</strong> Small/medium graphs, need all distances</p>
+            </div>
+        </div>
+
+        <div class="theory-section">
+            <h2>Quick Decision Tree</h2>
+            <div class="concept-box" style="background: #f0f8ff; padding: 20px;">
+                <pre style="font-family: monospace; line-height: 1.8;">
+Need shortest paths?
+├─ Single source?
+│  ├─ Non-negative weights? → <strong>Dijkstra</strong>
+│  └─ Negative weights? → <strong>Bellman-Ford</strong>
+│
+└─ All pairs?
+   ├─ Dense graph? → <strong>Floyd-Warshall</strong>
+   └─ Sparse graph? → <strong>V × Dijkstra</strong> or <strong>Johnson</strong>
+                </pre>
+            </div>
+        </div>
+
+        <div class="theory-section">
+            <h2>Key Concepts</h2>
+            <div class="summary-panel">
+                <h3>Relaxation</h3>
+                <p>If dist[u] + w(u,v) < dist[v], update dist[v]</p>
+                <p><em>Try to find shorter path through u</em></p>
+            </div>
+
+            <div class="summary-panel">
+                <h3>Optimal Substructure</h3>
+                <p>Shortest path from A to C through B = shortest(A to B) + shortest(B to C)</p>
+                <p><em>Foundation of dynamic programming approach</em></p>
+            </div>
+
+            <div class="summary-panel">
+                <h3>Negative Cycles</h3>
+                <p>Cycle with negative total weight → no shortest path (can keep looping)</p>
+                <p><em>Bellman-Ford detects these</em></p>
+            </div>
+        </div>
+
+        <div class="theory-section">
+            <h2>Quick Examples</h2>
+            
+            <div class="example-box">
+                <h4>Example 1: When to use which?</h4>
+                <p><strong>GPS Navigation:</strong> Dijkstra (non-negative distances)</p>
+                <p><strong>Currency Exchange:</strong> Bellman-Ford (can have gains/losses)</p>
+                <p><strong>Network Diameter:</strong> Floyd-Warshall (need all pairs)</p>
+            </div>
+
+            <div class="example-box">
+                <h4>Example 2: Complexity Comparison</h4>
+                <p>Graph: 1000 vertices, 5000 edges</p>
+                <p>• Dijkstra: ≈ 5000 × log(1000) ≈ 50,000 ops</p>
+                <p>• Bellman-Ford: 1000 × 5000 = 5,000,000 ops</p>
+                <p>• Floyd-Warshall: 1000³ = 1,000,000,000 ops</p>
+                <p><strong>Winner for single-source: Dijkstra (if non-negative)</strong></p>
+            </div>
+        </div>
+
+        <div class="theory-section">
+            <h2>Common Pitfalls</h2>
+            <div class="concept-box">
+                <ul>
+                    <li>❌ Using Dijkstra with negative edges</li>
+                    <li>❌ Forgetting to check for negative cycles</li>
+                    <li>❌ Using Floyd-Warshall on very large graphs</li>
+                    <li>❌ Not initializing distances properly (source = 0, others = ∞)</li>
+                    <li>❌ Processing vertices in wrong order in Dijkstra</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="theory-section">
+            <h2>Real-World Applications</h2>
+            <table>
+                <tr>
+                    <th>Application</th>
+                    <th>Algorithm</th>
+                    <th>Why</th>
+                </tr>
+                <tr>
+                    <td>GPS/Maps</td>
+                    <td>Dijkstra/A*</td>
+                    <td>Fast, non-negative distances</td>
+                </tr>
+                <tr>
+                    <td>Network Routing</td>
+                    <td>Dijkstra</td>
+                    <td>Find optimal packet paths</td>
+                </tr>
+                <tr>
+                    <td>Arbitrage Detection</td>
+                    <td>Bellman-Ford</td>
+                    <td>Detect profitable cycles</td>
+                </tr>
+                <tr>
+                    <td>Social Networks</td>
+                    <td>Floyd-Warshall</td>
+                    <td>Analyze all connections</td>
+                </tr>
+                <tr>
+                    <td>Game AI</td>
+                    <td>A*</td>
+                    <td>Efficient with heuristics</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="theory-section">
+            <h2>Optimization Tips</h2>
+            <div class="summary-panel">
+                <ul>
+                    <li><strong>Dijkstra:</strong> Use priority queue (min-heap) for O((V+E)log V)</li>
+                    <li><strong>Bellman-Ford:</strong> Stop early if no changes in iteration</li>
+                    <li><strong>Floyd-Warshall:</strong> Can recover paths using predecessor matrix</li>
+                    <li><strong>Bidirectional:</strong> Search from both ends for single-pair</li>
+                    <li><strong>A*:</strong> Add heuristic to Dijkstra for target-specific search</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="summary-panel">
+            <h3>Quick Reference</h3>
+            <ul>
+                <li>Dijkstra = Greedy + Priority Queue</li>
+                <li>Bellman-Ford = Dynamic Programming + V-1 iterations</li>
+                <li>Floyd-Warshall = DP + Consider all intermediates</li>
+                <li>Negative edges? → Not Dijkstra</li>
+                <li>All pairs? → Floyd-Warshall (small) or V×Dijkstra (large)</li>
+                <li>BFS works for unweighted graphs</li>
+            </ul>
+        </div>
+
+        <div style="text-align: center; margin: 30px 0;">
+            <a href="shortest-full.html" class="btn btn-primary">View Complete Theory</a>
+        </div>
+
+        <a href="../index.html" class="back-link">← Return to Modules</a>
+    </div>
+
+    <script src="../script.js"></script>
+</body>
+</html>

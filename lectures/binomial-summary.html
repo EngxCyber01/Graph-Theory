@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binomial Coefficients - Quick Review</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <header class="lecture-header">
+        <h1 class="lecture-title">Module 05: Quick Review</h1>
+        <p class="lecture-subtitle">Essential Concepts at a Glance</p>
+    </header>
+
+    <div class="content-wrapper">
+        <a href="../index.html" class="back-link">← Return to Modules</a>
+
+        <div class="summary-panel">
+            <h3>Core Definitions</h3>
+            <ul>
+                <li><strong>Binomial Coefficient:</strong> C(n, k) = n!/(k!(n-k)!) - ways to choose k from n</li>
+                <li><strong>Notation:</strong> (n k) or C(n, k) or nCk</li>
+                <li><strong>Symmetry:</strong> C(n, k) = C(n, n-k)</li>
+                <li><strong>Boundaries:</strong> C(n, 0) = C(n, n) = 1</li>
+            </ul>
+        </div>
+
+        <div class="theory-section">
+            <h2>Key Formulas</h2>
+            <table>
+                <tr>
+                    <th>Formula</th>
+                    <th>Expression</th>
+                    <th>Use</th>
+                </tr>
+                <tr>
+                    <td><strong>Pascal's Identity</strong></td>
+                    <td>C(n,k) = C(n-1,k-1) + C(n-1,k)</td>
+                    <td>Recursive computation</td>
+                </tr>
+                <tr>
+                    <td><strong>Binomial Theorem</strong></td>
+                    <td>(a+b)ⁿ = Σ C(n,k)aⁿ⁻ᵏbᵏ</td>
+                    <td>Expansion of powers</td>
+                </tr>
+                <tr>
+                    <td><strong>Sum Property</strong></td>
+                    <td>Σ C(n,k) = 2ⁿ</td>
+                    <td>Total subsets count</td>
+                </tr>
+                <tr>
+                    <td><strong>Alternating Sum</strong></td>
+                    <td>Σ (-1)ᵏC(n,k) = 0</td>
+                    <td>For n > 0</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="theory-section">
+            <h2>Pascal's Triangle (Quick Reference)</h2>
+            <div class="concept-box">
+                <pre style="text-align: center; font-size: 0.9em;">
+Row 0:                    1
+Row 1:                  1   1
+Row 2:                1   2   1
+Row 3:              1   3   3   1
+Row 4:            1   4   6   4   1
+Row 5:          1   5  10  10   5   1
+Row 6:        1   6  15  20  15   6   1
+                </pre>
+                <p style="margin-top: 15px;"><strong>Pattern:</strong> Each entry = sum of two entries above it</p>
+            </div>
+        </div>
+
+        <div class="theory-section">
+            <h2>Important Identities</h2>
+            <div class="summary-panel">
+                <ul>
+                    <li><strong>Vandermonde:</strong> C(m+n, r) = Σ C(m,k)×C(n,r-k)</li>
+                    <li><strong>Hockey Stick:</strong> Σ C(k,r) = C(n+1,r+1) for k=r to n</li>
+                    <li><strong>Sum of Squares:</strong> Σ C(n,k)² = C(2n,n)</li>
+                    <li><strong>Symmetry:</strong> C(n,k) = C(n,n-k)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="theory-section">
+            <h2>Quick Examples</h2>
+            
+            <div class="example-box">
+                <h4>Example 1: Basic Calculation</h4>
+                <p>C(6, 2) = 6!/(2!×4!) = (6×5)/2 = 15</p>
+            </div>
+
+            <div class="example-box">
+                <h4>Example 2: Binomial Expansion</h4>
+                <p>(x + 2)⁴ = x⁴ + 8x³ + 24x² + 32x + 16</p>
+                <p>Coefficients: 1, 4, 6, 4, 1 (from Row 4 of Pascal's Triangle)</p>
+                <p>Adjusted by powers of 2: 1, 4×2=8, 6×4=24, 4×8=32, 1×16=16</p>
+            </div>
+
+            <div class="example-box">
+                <h4>Example 3: Subset Count</h4>
+                <p>Set with 7 elements has 2⁷ = 128 total subsets</p>
+                <p>Subsets of size 3: C(7,3) = 35</p>
+            </div>
+        </div>
+
+        <div class="theory-section">
+            <h2>Common Applications</h2>
+            <table>
+                <tr>
+                    <th>Application</th>
+                    <th>Formula</th>
+                    <th>Example</th>
+                </tr>
+                <tr>
+                    <td>Choosing a committee</td>
+                    <td>C(n, k)</td>
+                    <td>5 from 10: C(10,5) = 252</td>
+                </tr>
+                <tr>
+                    <td>Probability calculations</td>
+                    <td>C(favorable)/C(total)</td>
+                    <td>3 heads in 5 flips: C(5,3)/2⁵</td>
+                </tr>
+                <tr>
+                    <td>Polynomial expansion</td>
+                    <td>Binomial Theorem</td>
+                    <td>Expand (x+y)ⁿ</td>
+                </tr>
+                <tr>
+                    <td>Counting paths</td>
+                    <td>C(n+k, k)</td>
+                    <td>Grid paths</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="theory-section">
+            <h2>Computation Tips</h2>
+            <div class="concept-box">
+                <ol>
+                    <li><strong>Use symmetry:</strong> C(100,98) = C(100,2) is easier to compute</li>
+                    <li><strong>Cancel before multiplying:</strong> Simplify fractions first</li>
+                    <li><strong>Use Pascal's Triangle:</strong> For small values, read directly</li>
+                    <li><strong>Multiplicative form:</strong> C(n,k) = C(n,k-1) × (n-k+1)/k</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="summary-panel">
+            <h3>Quick Reference</h3>
+            <ul>
+                <li>C(n, 0) = C(n, n) = 1 always</li>
+                <li>C(n, 1) = C(n, n-1) = n</li>
+                <li>C(n, 2) = n(n-1)/2</li>
+                <li>Sum of row n in Pascal's Triangle = 2ⁿ</li>
+                <li>Middle term is largest: C(n, n/2) is maximum</li>
+            </ul>
+        </div>
+
+        <div style="text-align: center; margin: 30px 0;">
+            <a href="binomial-full.html" class="btn btn-primary">View Complete Theory</a>
+        </div>
+
+        <a href="../index.html" class="back-link">← Return to Modules</a>
+    </div>
+
+    <script src="../script.js"></script>
+</body>
+</html>

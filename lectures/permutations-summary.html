@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Permutations and Combinations - Quick Review</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <header class="lecture-header">
+        <h1 class="lecture-title">Module 06: Quick Review</h1>
+        <p class="lecture-subtitle">Essential Concepts at a Glance</p>
+    </header>
+
+    <div class="content-wrapper">
+        <a href="../index.html" class="back-link">← Return to Modules</a>
+
+        <div class="summary-panel">
+            <h3>Core Definitions</h3>
+            <ul>
+                <li><strong>Permutation:</strong> Ordered arrangement - P(n,r) = n!/(n-r)!</li>
+                <li><strong>Combination:</strong> Unordered selection - C(n,r) = n!/(r!(n-r)!)</li>
+                <li><strong>Factorial:</strong> n! = n×(n-1)×(n-2)×...×2×1</li>
+                <li><strong>Relationship:</strong> P(n,r) = C(n,r) × r!</li>
+            </ul>
+        </div>
+
+        <div class="theory-section">
+            <h2>Quick Decision Guide</h2>
+            <table>
+                <tr>
+                    <th>Question</th>
+                    <th>Use This</th>
+                    <th>Formula</th>
+                </tr>
+                <tr>
+                    <td>Does order matter?</td>
+                    <td>Permutation</td>
+                    <td>P(n,r) = n!/(n-r)!</td>
+                </tr>
+                <tr>
+                    <td>Does order NOT matter?</td>
+                    <td>Combination</td>
+                    <td>C(n,r) = n!/(r!(n-r)!)</td>
+                </tr>
+                <tr>
+                    <td>Can items repeat?</td>
+                    <td>With repetition</td>
+                    <td>n<sup>r</sup> (perm) or C(n+r-1,r) (comb)</td>
+                </tr>
+                <tr>
+                    <td>Arranging in circle?</td>
+                    <td>Circular perm</td>
+                    <td>(n-1)!</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="theory-section">
+            <h2>Key Formulas Reference</h2>
+            <div class="concept-box">
+                <h3>Permutations</h3>
+                <ul>
+                    <li><strong>All n objects:</strong> n!</li>
+                    <li><strong>r from n:</strong> P(n,r) = n!/(n-r)!</li>
+                    <li><strong>With repetition:</strong> n<sup>r</sup></li>
+                    <li><strong>Circular:</strong> (n-1)!</li>
+                    <li><strong>With identical items:</strong> n!/(n₁!×n₂!×...×nₖ!)</li>
+                </ul>
+            </div>
+
+            <div class="concept-box">
+                <h3>Combinations</h3>
+                <ul>
+                    <li><strong>r from n:</strong> C(n,r) = n!/(r!(n-r)!)</li>
+                    <li><strong>With repetition:</strong> C(n+r-1, r)</li>
+                    <li><strong>Symmetry:</strong> C(n,r) = C(n,n-r)</li>
+                    <li><strong>Pascal's Identity:</strong> C(n,r) = C(n-1,r-1) + C(n-1,r)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="theory-section">
+            <h2>Quick Examples</h2>
+            
+            <div class="example-box">
+                <h4>Example 1: Basic Permutation</h4>
+                <p><strong>Q:</strong> 5 people in a line?</p>
+                <p><strong>A:</strong> 5! = 120 ways</p>
+            </div>
+
+            <div class="example-box">
+                <h4>Example 2: Partial Permutation</h4>
+                <p><strong>Q:</strong> Top 3 from 8 runners?</p>
+                <p><strong>A:</strong> P(8,3) = 8×7×6 = 336</p>
+            </div>
+
+            <div class="example-box">
+                <h4>Example 3: Basic Combination</h4>
+                <p><strong>Q:</strong> Choose 4 from 10?</p>
+                <p><strong>A:</strong> C(10,4) = 210</p>
+            </div>
+
+            <div class="example-box">
+                <h4>Example 4: Committee Selection</h4>
+                <p><strong>Q:</strong> 3 from 7 men, 2 from 5 women?</p>
+                <p><strong>A:</strong> C(7,3) × C(5,2) = 35 × 10 = 350</p>
+            </div>
+        </div>
+
+        <div class="theory-section">
+            <h2>Common Patterns</h2>
+            <table>
+                <tr>
+                    <th>Problem Type</th>
+                    <th>Approach</th>
+                    <th>Example</th>
+                </tr>
+                <tr>
+                    <td>Adjacent items</td>
+                    <td>Treat as unit, multiply by internal</td>
+                    <td>(n-k+1)! × k!</td>
+                </tr>
+                <tr>
+                    <td>Non-adjacent items</td>
+                    <td>Arrange others, place in gaps</td>
+                    <td>Arrange × P(gaps,items)</td>
+                </tr>
+                <tr>
+                    <td>At least k</td>
+                    <td>Use complement: Total - Less than k</td>
+                    <td>C(n,r) - ΣC(n,i) for i&lt;k</td>
+                </tr>
+                <tr>
+                    <td>Distribute items</td>
+                    <td>Stars and bars</td>
+                    <td>C(n+k-1, k-1)</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="theory-section">
+            <h2>Counting Principles</h2>
+            <div class="summary-panel">
+                <ul>
+                    <li><strong>Multiplication Rule:</strong> Independent events → multiply</li>
+                    <li><strong>Addition Rule:</strong> Mutually exclusive events → add</li>
+                    <li><strong>Complementary Counting:</strong> Total - Unwanted cases</li>
+                    <li><strong>Inclusion-Exclusion:</strong> |A∪B| = |A| + |B| - |A∩B|</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="theory-section">
+            <h2>Common Values Quick Reference</h2>
+            <div class="concept-box">
+                <table>
+                    <tr>
+                        <th>n!</th>
+                        <th>Value</th>
+                        <th>C(n,2)</th>
+                        <th>Value</th>
+                    </tr>
+                    <tr><td>3!</td><td>6</td><td>C(5,2)</td><td>10</td></tr>
+                    <tr><td>4!</td><td>24</td><td>C(6,2)</td><td>15</td></tr>
+                    <tr><td>5!</td><td>120</td><td>C(7,2)</td><td>21</td></tr>
+                    <tr><td>6!</td><td>720</td><td>C(8,2)</td><td>28</td></tr>
+                    <tr><td>7!</td><td>5,040</td><td>C(10,2)</td><td>45</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="theory-section">
+            <h2>Problem-Solving Strategy</h2>
+            <div class="concept-box">
+                <ol>
+                    <li><strong>Identify:</strong> Does order matter? Repetition allowed?</li>
+                    <li><strong>Count:</strong> Total number of items and selections</li>
+                    <li><strong>Check:</strong> Any restrictions or conditions?</li>
+                    <li><strong>Apply:</strong> Choose appropriate formula</li>
+                    <li><strong>Multiply:</strong> Handle independent stages</li>
+                    <li><strong>Verify:</strong> Does answer make intuitive sense?</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="summary-panel">
+            <h3>Quick Tips</h3>
+            <ul>
+                <li>Arrangements/Rankings → Permutation</li>
+                <li>Committees/Groups → Combination</li>
+                <li>If calculating C(n,k) is hard, try C(n,n-k) instead</li>
+                <li>Break complex problems into stages</li>
+                <li>Complement method often simpler for "at least" problems</li>
+                <li>Always check: n ≥ r for both P(n,r) and C(n,r)</li>
+            </ul>
+        </div>
+
+        <div style="text-align: center; margin: 30px 0;">
+            <a href="permutations-full.html" class="btn btn-primary">View Complete Theory</a>
+        </div>
+
+        <a href="../index.html" class="back-link">← Return to Modules</a>
+    </div>
+
+    <script src="../script.js"></script>
+</body>
+</html>
